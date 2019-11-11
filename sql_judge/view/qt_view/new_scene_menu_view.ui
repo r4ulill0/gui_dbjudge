@@ -18,20 +18,13 @@
     <rect>
      <x>150</x>
      <y>80</y>
-     <width>302</width>
+     <width>366</width>
      <height>251</height>
     </rect>
    </property>
    <layout class="QGridLayout" name="gridLayout">
     <item row="1" column="1">
      <widget class="QLineEdit" name="scene_name_input_text"/>
-    </item>
-    <item row="0" column="1">
-     <widget class="QLabel" name="scene_name_label">
-      <property name="text">
-       <string>Nombre del escenario:</string>
-      </property>
-     </widget>
     </item>
     <item row="5" column="0">
      <widget class="QPushButton" name="return_button">
@@ -48,7 +41,7 @@
       <property name="sizeHint" stdset="0">
        <size>
         <width>20</width>
-        <height>40</height>
+        <height>30</height>
        </size>
       </property>
      </spacer>
@@ -77,6 +70,25 @@
      <widget class="QLabel" name="extra_info_label">
       <property name="text">
        <string/>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignJustify|Qt::AlignTop</set>
+      </property>
+      <property name="margin">
+       <number>20</number>
+      </property>
+      <property name="indent">
+       <number>-1</number>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="0" colspan="3">
+     <widget class="QLabel" name="scene_name_label">
+      <property name="text">
+       <string>Nombre del escenario:</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
       </property>
      </widget>
     </item>
