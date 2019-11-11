@@ -8,3 +8,7 @@ class Modify_scene_menu(Ui_ModifySceneMenu, QWidget):
 
         self.setupUi(parent)
         self.gridLayoutWidget.hide()
+
+    def load_scenes_combo_box(self, items):
+        self.scene_combo_box.clear()
+        self.scene_combo_box.addItems(items)

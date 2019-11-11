@@ -1,5 +1,6 @@
 from PyQt5.QtWidgets import QMainWindow
 from PyQt5.QtCore import pyqtSlot
+from PyQt5.QtCore import pyqtSignal
 
 from view.qt_view.main_window_view import Ui_MainWindow
 from view.main_menu import Main_menu
@@ -10,9 +11,13 @@ from view.modify_scene_menu import Modify_scene_menu
 from control.main_controller import Main_controller
 from control.load_sql_controller import Load_sql_controller
 from control.new_scene_controller import New_scene_controller
+from control.modify_scene_controller import Modify_scene_controller
 
 
 class Main_window(QMainWindow, Ui_MainWindow):
+    # define signals
+    arrived_at_modify_scene = pyqtSignal()
+
     def __init__(self):
         super(Main_window, self).__init__()
 
@@ -35,6 +40,12 @@ class Main_window(QMainWindow, Ui_MainWindow):
         self.load_sql_controller = Load_sql_controller(self.load_sql_menu)
         self.new_scene_controller = New_scene_controller(
             self.main_controller, self.new_scene_menu)
+        self.modify_scene_controller = Modify_scene_controller(
+            self.modify_scene_menu)
+
+        # connect signals
+        self.arrived_at_modify_scene.connect(
+            self.modify_scene_controller.load_scenes)
 
         # connect transition elements
         self.main_menu.admin_menu_button.clicked.connect(
@@ -77,6 +88,7 @@ class Main_window(QMainWindow, Ui_MainWindow):
     def admin_menu_to_modify_scene_menu(self):
         self.admin_menu.gridLayoutWidget.hide()
         self.modify_scene_menu.gridLayoutWidget.show()
+        self.arrived_at_modify_scene.emit()
 
     @pyqtSlot(bool)
     def modify_scene_to_admin_menu(self):
@@ -91,6 +103,7 @@ class Main_window(QMainWindow, Ui_MainWindow):
     def new_scene_to_modify_scene(self):
         self.new_scene_menu.gridLayoutWidget.hide()
         self.modify_scene_menu.gridLayoutWidget.show()
+        self.arrived_at_modify_scene.emit()
 
     @pyqtSlot(bool)
     def modify_scene_to_load_sql(self):
