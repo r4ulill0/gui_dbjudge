@@ -8,3 +8,6 @@ class New_scene_menu(Ui_NewSceneMenu, QWidget):
 
         self.setupUi(parent)
         self.gridLayoutWidget.hide()
+
+    def get_scene_name_text(self):
+        return self.scene_name_input_text.text()
