@@ -4,8 +4,7 @@ from PyQt5.QtWidgets import QWidget
 
 
 class Main_menu(Ui_MainMenu, QWidget):
-    def __init__(self, parent=None):
+    def __init__(self):
         super(Main_menu, self).__init__()
-
-        self.setupUi(parent)
-        self.gridLayoutWidget.hide()
+        self.setObjectName("")
+        self.setupUi(self)

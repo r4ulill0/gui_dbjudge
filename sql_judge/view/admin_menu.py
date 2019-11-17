@@ -5,8 +5,7 @@ from PyQt5.QtWidgets import QWidget
 
 
 class Admin_menu(Ui_AdminMenu, QWidget):
-    def __init__(self, parent):
+    def __init__(self):
         super(Admin_menu, self).__init__()
 
-        self.setupUi(parent)
-        self.gridLayoutWidget.hide()
+        self.setupUi(self)

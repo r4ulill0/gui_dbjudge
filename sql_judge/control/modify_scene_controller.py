@@ -10,6 +10,5 @@ class Modify_scene_controller(QObject):
         self.manager = Manager.singleton_instance
 
     def load_scenes(self):
-        print("dentro!")
         databases = self.manager.get_databases()
         self.main_view.load_scenes_combo_box(databases)

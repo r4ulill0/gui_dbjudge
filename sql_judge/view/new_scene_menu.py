@@ -3,11 +3,10 @@ from PyQt5.QtWidgets import QWidget
 
 
 class New_scene_menu(Ui_NewSceneMenu, QWidget):
-    def __init__(self, parent=None):
+    def __init__(self):
         super().__init__()
 
-        self.setupUi(parent)
-        self.gridLayoutWidget.hide()
+        self.setupUi(self)
 
     def get_scene_name_text(self):
         return self.scene_name_input_text.text()

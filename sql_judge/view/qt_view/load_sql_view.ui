@@ -36,14 +36,7 @@
       </property>
      </spacer>
     </item>
-    <item row="1" column="3">
-     <widget class="QPushButton" name="load_file_button">
-      <property name="text">
-       <string>Cargar desde archivo</string>
-      </property>
-     </widget>
-    </item>
-    <item row="3" column="2">
+    <item row="4" column="3">
      <spacer name="verticalSpacer">
       <property name="orientation">
        <enum>Qt::Vertical</enum>
@@ -55,13 +48,6 @@
        </size>
       </property>
      </spacer>
-    </item>
-    <item row="3" column="3">
-     <widget class="QPushButton" name="confirm_button">
-      <property name="text">
-       <string>Confirmar</string>
-      </property>
-     </widget>
     </item>
     <item row="0" column="5">
      <spacer name="horizontalSpacer_4">
@@ -75,6 +61,27 @@
        </size>
       </property>
      </spacer>
+    </item>
+    <item row="4" column="4">
+     <widget class="QPushButton" name="confirm_button">
+      <property name="text">
+       <string>Confirmar</string>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="3">
+     <widget class="QPushButton" name="load_file_button">
+      <property name="text">
+       <string>Cargar desde archivo</string>
+      </property>
+     </widget>
+    </item>
+    <item row="4" column="2">
+     <widget class="QPushButton" name="return_button">
+      <property name="text">
+       <string>Volver</string>
+      </property>
+     </widget>
     </item>
     <item row="0" column="2">
      <spacer name="horizontalSpacer">
@@ -104,6 +111,13 @@
     </item>
     <item row="2" column="2" colspan="3">
      <widget class="QPlainTextEdit" name="sql_text_input"/>
+    </item>
+    <item row="3" column="2" colspan="3">
+     <widget class="QLabel" name="status_label">
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
     </item>
    </layout>
   </widget>

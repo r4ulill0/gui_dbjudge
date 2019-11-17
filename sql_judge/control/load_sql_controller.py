@@ -1,3 +1,5 @@
+import sys
+
 from dbjudge import squemaGetter
 from dbjudge.connection_manager.manager import Manager
 
@@ -12,6 +14,7 @@ class Load_sql_controller(QObject):
 
         self.named = False
         self.sql_loaded = False
+        self.scene_name = None
 
         view.confirm_button.clicked.connect(self.load_sql_event)
 
@@ -19,6 +22,17 @@ class Load_sql_controller(QObject):
     def load_sql_event(self):
         manager = Manager.singleton_instance
         sql = self.main_view.get_sql_text()
-        print(sql)
-        # context = squemaGetter.create_context(
-        #     Manager.singleton_instance.selected_db_connection)
+
+        try:
+            manager.select_database(self.scene_name)
+            manager.execute_sql(sql)
+            self.main_view.set_status_text(
+                "Exito! cargado en {db}".format(self.scene_name), True)
+        except:
+            print(sys.exc_info())
+            self.main_view.set_status_text(
+                "Ocurrió un error inesperado: {}", False)
+
+    @pyqtSlot(str)
+    def load_scene_name(self, name):
+        self.scene_name = name
