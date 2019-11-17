@@ -27,6 +27,7 @@ class Data_generation_controller(QObject):
         Manager.singleton_instance.select_database(self.scene_name)
         conn = Manager.singleton_instance.selected_db_connection
         self.context = squemaGetter.create_context(conn)
+        self.main_view.tabWidget.clear()
         for index, table in enumerate(self.context.tables):
             new_tab_page = Table_data_generation_tab(
                 table)
