@@ -10,7 +10,7 @@ from PyQt5.QtGui import QColor
 
 
 class Column_data_generation_row(Ui_ColumnDataGenerationRow, QWidget):
-    type_info_modified = pyqtSignal(str, str)
+    type_info_modified = pyqtSignal(str, str, str)
 
     def __init__(self, column, dark_background):
         super().__init__()
@@ -36,7 +36,6 @@ class Column_data_generation_row(Ui_ColumnDataGenerationRow, QWidget):
         self.setLayout(self.gridLayout)
 
     def _load_custom_types(self):
-        print("toggled")
         self.custom_type_input.clear()
         types = Manager.singleton_instance.get_custom_fakes(
             self.column.ctype)
@@ -52,9 +51,10 @@ class Column_data_generation_row(Ui_ColumnDataGenerationRow, QWidget):
 
         for button, input_element in mapped_buttons_and_type_info.items():
             if button.isChecked():
+                column = self.column.name
                 current_type = self._get_button_type(button)
                 extra_data = self._get_extra_data_from(input_element)
-                self.type_info_modified.emit(current_type, extra_data)
+                self.type_info_modified.emit(column, current_type, extra_data)
                 break
 
     def _get_button_type(self, button):

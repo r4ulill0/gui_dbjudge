@@ -29,9 +29,8 @@ class Load_sql_controller(QObject):
             self.main_view.set_status_text(
                 "Exito! cargado en {db}".format(self.scene_name), True)
         except:
-            print(sys.exc_info())
             self.main_view.set_status_text(
-                "Ocurrió un error inesperado: {}", False)
+                "Ocurrió un error inesperado: {}".format(sys.exc_info()), False)
 
     @pyqtSlot(str)
     def load_scene_name(self, name):
