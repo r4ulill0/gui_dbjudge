@@ -37,9 +37,9 @@ class Column_data_generation_row(Ui_ColumnDataGenerationRow, QWidget):
 
     def _load_custom_types(self):
         self.custom_type_input.clear()
-        types = Manager.singleton_instance.get_custom_fakes(
-            self.column.ctype)
-        self.custom_type_input.addItems(types)
+        types = Manager.singleton_instance.get_fake_types()
+        for fake_type in types:
+            self.custom_type_input.addItem(fake_type[0])
 
     @pyqtSlot(bool)
     def update_type(self):

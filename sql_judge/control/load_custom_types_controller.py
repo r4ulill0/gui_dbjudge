@@ -21,4 +21,4 @@ class Load_custom_types_controller(QObject):
         for file_path in self.main_view.selected_files:
             print("loading types from {}".format(file_path))
             results = custom_loader.load_csv_fakes(file_path)
-            custom_loader.save_to_database(results, [0])
+            custom_loader.save_to_database(results)
