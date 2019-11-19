@@ -26,8 +26,9 @@ class Load_sql_controller(QObject):
         try:
             manager.select_database(self.scene_name)
             manager.execute_sql(sql)
+            manager.selected_db_connection.commit()
             self.main_view.set_status_text(
-                "Exito! cargado en {db}".format(self.scene_name), True)
+                "Exito! cargado en {}".format(self.scene_name), True)
         except:
             self.main_view.set_status_text(
                 "Ocurrió un error inesperado: {}".format(sys.exc_info()), False)

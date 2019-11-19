@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>AdminMenu</class>
- <widget class="QWidget" name="Form">
+ <widget class="QWidget" name="AdminMenu">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -23,21 +23,14 @@
     </rect>
    </property>
    <layout class="QGridLayout" name="gridLayout">
-    <item row="1" column="0">
-     <widget class="QPushButton" name="add_questions_button">
-      <property name="text">
-       <string>Añadir preguntas</string>
-      </property>
-     </widget>
-    </item>
-    <item row="3" column="0">
+    <item row="0" column="0">
      <widget class="QPushButton" name="administrate_scenes_button">
       <property name="text">
        <string>Administrar escenarios</string>
       </property>
      </widget>
     </item>
-    <item row="0" column="0">
+    <item row="6" column="0">
      <widget class="QPushButton" name="administrate_users_button">
       <property name="text">
        <string>Administrar usuarios</string>
@@ -45,6 +38,20 @@
      </widget>
     </item>
     <item row="4" column="0">
+     <widget class="QPushButton" name="new_scene_button">
+      <property name="text">
+       <string>Nuevo escenario</string>
+      </property>
+     </widget>
+    </item>
+    <item row="9" column="0">
+     <widget class="QPushButton" name="return_button">
+      <property name="text">
+       <string>Volver</string>
+      </property>
+     </widget>
+    </item>
+    <item row="8" column="0">
      <spacer name="verticalSpacer">
       <property name="orientation">
        <enum>Qt::Vertical</enum>
@@ -58,16 +65,16 @@
      </spacer>
     </item>
     <item row="2" column="0">
-     <widget class="QPushButton" name="new_scene_button">
+     <widget class="QPushButton" name="add_questions_button">
       <property name="text">
-       <string>Nuevo escenario</string>
+       <string>Añadir preguntas</string>
       </property>
      </widget>
     </item>
     <item row="5" column="0">
-     <widget class="QPushButton" name="return_button">
+     <widget class="QPushButton" name="load_custom_fakes_button">
       <property name="text">
-       <string>Volver</string>
+       <string>Cargar tipos de datos personalizados</string>
       </property>
      </widget>
     </item>
