@@ -17,6 +17,8 @@ class Data_generation_controller(QObject):
         self.scene_name = None
         self.context = None
 
+        self.main_view.generate_data_button.clicked.connect(self.generate_data)
+
     @pyqtSlot(str, str, str, str)
     def update_type(self, table_name, column_name, fake_name, extra_data):
         table = self.context.get_table_by_name(table_name)
