@@ -51,12 +51,7 @@ class Main_window(QMainWindow, Ui_MainWindow):
         self.views_stack.addWidget(self.data_generation_menu)
 
         # load controllers
-        self.main_controller = Main_controller(self,
-                                               'conexion',
-                                               'plsL3tM3in',
-                                               'localhost',
-                                               'main_tfg'
-                                               )
+        self.main_controller = Main_controller(self)
         self.load_sql_controller = Load_sql_controller(self.load_sql_menu)
         self.new_scene_controller = New_scene_controller(
             self.main_controller, self.new_scene_menu)
