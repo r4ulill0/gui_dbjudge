@@ -70,7 +70,7 @@ class Column_data_generation_row(Ui_ColumnDataGenerationRow, QWidget):
         data = None
         if input_type == QLineEdit:
             data = input_element.text()
-        elif input_type == QLineEdit:
+        elif input_type == QComboBox:
             data = input_element.currentText()
 
         return data
