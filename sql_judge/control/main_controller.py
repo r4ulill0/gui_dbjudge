@@ -11,10 +11,11 @@ class Main_controller(QObject):
 
         self.main_window = view
         config = configparser.ConfigParser()
-        config.read(os.path.join(
+        dir_cfg = os.path.join(
             sys.path[0],
             'config.ini'
-        ))
+        )
+        config.read(dir_cfg)
         self.connection_manager = Manager(
             user=config['DATABASE']['user'],
             password=config['DATABASE']['pass'],
