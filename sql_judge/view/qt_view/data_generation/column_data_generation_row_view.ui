@@ -43,7 +43,11 @@
      </spacer>
     </item>
     <item row="0" column="5">
-     <widget class="QLineEdit" name="regex_input"/>
+     <widget class="QLineEdit" name="regex_input">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+     </widget>
     </item>
     <item row="0" column="3">
      <widget class="QRadioButton" name="regex_radio_button">
@@ -59,7 +63,11 @@
      </widget>
     </item>
     <item row="2" column="5">
-     <widget class="QComboBox" name="custom_type_input"/>
+     <widget class="QComboBox" name="custom_type_input">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+     </widget>
     </item>
     <item row="2" column="3">
      <widget class="QRadioButton" name="custom_type_radio_button">

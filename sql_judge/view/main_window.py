@@ -6,7 +6,9 @@ from PyQt5.QtCore import pyqtSignal
 from view.qt_view.main_window_view import Ui_MainWindow
 from view.main_menu import Main_menu
 from view.admin_menu import Admin_menu
-from view.new_scene_menu import New_scene_menu
+from view.new_scene_menu_schema import New_scene_menu_schema
+from view.new_scene_menu_datagen import New_scene_menu_datagen
+from view.new_scene_menu_questions import New_scene_menu_questions
 from view.load_sql_menu import Load_sql_menu
 from view.load_custom_types_menu import Load_custom_types_menu
 from view.modify_scene_menu import Modify_scene_menu
@@ -35,7 +37,9 @@ class Main_window(QMainWindow, Ui_MainWindow):
         self.admin_menu = Admin_menu()
         self.load_custom_types_menu = Load_custom_types_menu()
         self.modify_scene_menu = Modify_scene_menu()
-        self.new_scene_menu = New_scene_menu()
+        self.new_scene_menu_schema = New_scene_menu_schema()
+        self.new_scene_menu_datagen = New_scene_menu_datagen()
+        self.new_scene_menu_questions = New_scene_menu_questions()
         self.load_sql_menu = Load_sql_menu()
         self.data_generation_menu = Data_generation_menu()
 
@@ -46,7 +50,9 @@ class Main_window(QMainWindow, Ui_MainWindow):
         self.views_stack.addWidget(self.admin_menu)
         self.views_stack.addWidget(self.load_custom_types_menu)
         self.views_stack.addWidget(self.modify_scene_menu)
-        self.views_stack.addWidget(self.new_scene_menu)
+        self.views_stack.addWidget(self.new_scene_menu_schema)
+        self.views_stack.addWidget(self.new_scene_menu_datagen)
+        self.views_stack.addWidget(self.new_scene_menu_questions)
         self.views_stack.addWidget(self.load_sql_menu)
         self.views_stack.addWidget(self.data_generation_menu)
 
@@ -54,13 +60,16 @@ class Main_window(QMainWindow, Ui_MainWindow):
         self.main_controller = Main_controller(self)
         self.load_sql_controller = Load_sql_controller(self.load_sql_menu)
         self.new_scene_controller = New_scene_controller(
-            self.main_controller, self.new_scene_menu)
+            self.main_controller, self.new_scene_menu_schema)
         self.load_custom_types_controller = Load_custom_types_controller(
             self.load_custom_types_menu)
         self.modify_scene_controller = Modify_scene_controller(
             self.modify_scene_menu)
         self.data_generation_controller = Data_generation_controller(
-            self.data_generation_menu)
+            self.new_scene_menu_datagen)
+        # self.data_generation_controller = Data_generation_controller(
+        #     self.data_generation_menu)
+        # TODO add controller for new_scene_data_gen
 
         # connect signals
         self.arrived_at_modify_scene.connect(
@@ -78,16 +87,28 @@ class Main_window(QMainWindow, Ui_MainWindow):
         # self.main_menu.user_menu_button.clicked.connect()
         # self.admin_menu.add_questions_button.clicked.connect()
         # self.admin_menu.administrate_users_button.clicked.connect()
+        self.admin_menu.create_scene_button.clicked.connect(
+            self.admin_menu_to_new_scene)
         self.admin_menu.load_custom_fakes_button.clicked.connect(
             self.admin_menu_to_load_custom_types_menu)
-        self.admin_menu.administrate_scenes_button.clicked.connect(
-            self.admin_menu_to_modify_scene_menu)
         self.admin_menu.return_button.clicked.connect(
             self.admin_menu_to_main_menu)
-        self.admin_menu.new_scene_button.clicked.connect(
-            self.admin_menu_to_new_scene)
-        self.new_scene_menu.return_button.clicked.connect(
+        # self.admin_menu.new_scene_button.clicked.connect(
+        #     self.admin_menu_to_new_scene)
+        self.new_scene_menu_schema.return_button.clicked.connect(
             self.new_scene_to_admin_menu)
+        self.new_scene_menu_schema.navbar_gen_data.clicked.connect(
+            self.news_scene_schema_to_new_scen_datagen)
+        self.new_scene_menu_datagen.return_button.clicked.connect(
+            self.new_scene_to_admin_menu)
+        self.new_scene_menu_datagen.navbar_schema.clicked.connect(
+            self.new_scene_menu_datagen_to_schema)
+        self.new_scene_menu_datagen.navbar_questions.clicked.connect(
+            self.new_scene_menu_datagen_to_questions)
+        self.new_scene_menu_questions.navbar_schema.clicked.connect(
+            self.new_scene_menu_questions_to_schema)
+        self.new_scene_menu_questions.navbar_gen_data.clicked.connect(
+            self.new_scene_menu_questions_to_datagen)
         self.modify_scene_menu.return_button.clicked.connect(
             self.modify_scene_to_admin_menu)
         self.modify_scene_menu.load_sql_button.clicked.connect(
@@ -113,14 +134,22 @@ class Main_window(QMainWindow, Ui_MainWindow):
 
     @pyqtSlot(bool)
     def admin_menu_to_new_scene(self):
-        self.views_stack.setCurrentWidget(self.new_scene_menu)
+        self.views_stack.setCurrentWidget(self.new_scene_menu_schema)
+
+    @pyqtSlot(bool)
+    def news_scene_schema_to_new_scen_datagen(self):
+        self.views_stack.setCurrentWidget(self.new_scene_menu_datagen)
+
+    @pyqtSlot(bool)
+    def new_scene_menu_datagen_to_schema(self):
+        self.views_stack.setCurrentWidget(self.new_scene_menu_schema)
 
     @pyqtSlot(bool)
     def admin_menu_to_load_custom_types_menu(self):
         self.views_stack.setCurrentWidget(self.load_custom_types_menu)
 
     @pyqtSlot(bool)
-    def admin_menu_to_modify_scene_menu(self):
+    def admin_menu_to_create_scene_menu(self):
         self.arrived_at_modify_scene.emit()
         self.views_stack.setCurrentWidget(self.modify_scene_menu)
 
@@ -132,9 +161,21 @@ class Main_window(QMainWindow, Ui_MainWindow):
     def new_scene_to_admin_menu(self):
         self.views_stack.setCurrentWidget(self.admin_menu)
 
-    def new_scene_to_modify_scene(self):
-        self.arrived_at_modify_scene.emit()
-        self.views_stack.setCurrentWidget(self.modify_scene_menu)
+    @pyqtSlot(bool)
+    def new_scene_menu_datagen_to_schema(self):
+        self.views_stack.setCurrentWidget(self.new_scene_menu_schema)
+
+    @pyqtSlot(bool)
+    def new_scene_menu_datagen_to_questions(self):
+        self.views_stack.setCurrentWidget(self.new_scene_menu_questions)
+
+    @pyqtSlot(bool)
+    def new_scene_menu_questions_to_schema(self):
+        self.views_stack.setCurrentWidget(self.new_scene_menu_schema)
+
+    @pyqtSlot(bool)
+    def new_scene_menu_questions_to_datagen(self):
+        self.views_stack.setCurrentWidget(self.new_scene_menu_datagen)
 
     @pyqtSlot(bool)
     def modify_scene_to_load_sql(self):

@@ -1,6 +1,6 @@
 from dbjudge.connection_manager.manager import Manager
 from PyQt5.QtCore import QObject, pyqtSlot
-from view.new_scene_menu import New_scene_menu
+from view.new_scene_menu_schema import New_scene_menu_schema
 
 
 class New_scene_controller(QObject):
@@ -10,7 +10,7 @@ class New_scene_controller(QObject):
         self.main_view = view
         self.manager = Manager.singleton_instance
 
-        view.create_button.clicked.connect(self.create_new_scene)
+        # view.create_button.clicked.connect(self.create_new_scene)
 
     @pyqtSlot(bool)
     def create_new_scene(self):
