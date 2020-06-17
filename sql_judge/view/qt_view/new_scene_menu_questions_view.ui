@@ -232,7 +232,7 @@
          </spacer>
         </item>
         <item>
-         <widget class="QPushButton" name="pushButton_2">
+         <widget class="QPushButton" name="return_button">
           <property name="maximumSize">
            <size>
             <width>100</width>
@@ -262,7 +262,7 @@
       <item row="4" column="2" colspan="3">
        <layout class="QHBoxLayout" name="horizontalLayout_6">
         <item>
-         <widget class="QPushButton" name="pushButton">
+         <widget class="QPushButton" name="add_question_button">
           <property name="maximumSize">
            <size>
             <width>120</width>
@@ -536,7 +536,7 @@
            </spacer>
           </item>
           <item>
-           <widget class="QPushButton" name="pushButton_3">
+           <widget class="QPushButton" name="finish_button">
             <property name="maximumSize">
              <size>
               <width>120</width>

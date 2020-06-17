@@ -109,6 +109,8 @@ class Main_window(QMainWindow, Ui_MainWindow):
             self.new_scene_menu_questions_to_schema)
         self.new_scene_menu_questions.navbar_gen_data.clicked.connect(
             self.new_scene_menu_questions_to_datagen)
+        self.new_scene_menu_questions.return_button.clicked.connect(
+            self.new_scene_to_admin_menu)
         self.modify_scene_menu.return_button.clicked.connect(
             self.modify_scene_to_admin_menu)
         self.modify_scene_menu.load_sql_button.clicked.connect(
