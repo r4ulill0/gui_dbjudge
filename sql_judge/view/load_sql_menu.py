@@ -6,7 +6,7 @@ from PyQt5.QtWidgets import QFileDialog
 from PyQt5.QtCore import pyqtSlot
 
 
-class Load_sql_menu(QWidget, Ui_LoadSqlView):
+class Load_sql_menu(QWidget):
     def __init__(self):
         super().__init__()
 
