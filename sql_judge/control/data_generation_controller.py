@@ -17,7 +17,8 @@ class Data_generation_controller(QObject):
         self.scene_name = None
         self.context = None
 
-        self.main_view.generate_data_button.clicked.connect(self.generate_data)
+        # TODO enable data generation confirmation with navigation button
+        # self.main_view.navbar_questions.clicked.connect(self.generate_data)
 
     @pyqtSlot(str, str, str, str)
     def update_type(self, table_name, column_name, fake_name, extra_data):
