@@ -1,12 +1,12 @@
 import asyncio
 
-from view.qt_view.load_sql_view import Ui_LoadSqlView
+from view.qt_view.custom_types.load_custom_types_view import Ui_LoadCustomTypesView
 from PyQt5.QtWidgets import QWidget
 from PyQt5.QtWidgets import QFileDialog
 from PyQt5.QtCore import pyqtSlot
 
 
-class Load_custom_types_menu(QWidget, Ui_LoadSqlView):
+class Load_custom_types_menu(QWidget, Ui_LoadCustomTypesView):
     def __init__(self):
         super().__init__()
 

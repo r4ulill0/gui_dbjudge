@@ -14,7 +14,7 @@ class Load_custom_types_controller(QObject):
         super().__init__()
         self.main_view = view
         # TODO conectar con el menu y cargar desde dbjudge.customfakesloader el csv
-        view.confirm_button.clicked.connect(self.load_csv_types)
+        # view.confirm_button.clicked.connect(self.load_csv_types)
 
     @pyqtSlot(bool)
     def load_csv_types(self):

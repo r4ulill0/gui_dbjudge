@@ -16,7 +16,7 @@ class Load_sql_controller(QObject):
         self.sql_loaded = False
         self.scene_name = None
 
-        view.confirm_button.clicked.connect(self.load_sql_event)
+        # view.confirm_button.clicked.connect(self.load_sql_event)
 
     @pyqtSlot(bool)
     def load_sql_event(self):

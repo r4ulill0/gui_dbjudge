@@ -40,7 +40,6 @@ class Main_window(QMainWindow, Ui_MainWindow):
         self.new_scene_menu_schema = New_scene_menu_schema()
         self.new_scene_menu_datagen = New_scene_menu_datagen()
         self.new_scene_menu_questions = New_scene_menu_questions()
-        self.load_sql_menu = Load_sql_menu()
         self.data_generation_menu = Data_generation_menu()
 
         # load views in the QStackedWidget
@@ -53,12 +52,12 @@ class Main_window(QMainWindow, Ui_MainWindow):
         self.views_stack.addWidget(self.new_scene_menu_schema)
         self.views_stack.addWidget(self.new_scene_menu_datagen)
         self.views_stack.addWidget(self.new_scene_menu_questions)
-        self.views_stack.addWidget(self.load_sql_menu)
+        # self.views_stack.addWidget(self.load_sql_menu)
         self.views_stack.addWidget(self.data_generation_menu)
 
         # load controllers
         self.main_controller = Main_controller(self)
-        self.load_sql_controller = Load_sql_controller(self.load_sql_menu)
+        # self.load_sql_controller = Load_sql_controller(self.load_sql_menu)
         self.new_scene_controller = New_scene_controller(
             self.main_controller, self.new_scene_menu_schema)
         self.load_custom_types_controller = Load_custom_types_controller(
@@ -76,8 +75,8 @@ class Main_window(QMainWindow, Ui_MainWindow):
             self.modify_scene_controller.load_scenes)
         self.arrived_at_data_generation.connect(
             self.data_generation_controller.load_scene_data)
-        self.moved_with_selected_scene.connect(
-            self.load_sql_controller.load_scene_name)
+        # self.moved_with_selected_scene.connect(
+        #     self.load_sql_controller.load_scene_name)
         self.moved_with_selected_scene.connect(
             self.data_generation_controller.load_scene_name)
 
@@ -117,8 +116,8 @@ class Main_window(QMainWindow, Ui_MainWindow):
             self.modify_scene_to_load_sql)
         self.modify_scene_menu.generate_data_button.clicked.connect(
             self.modify_scene_to_data_generation)
-        self.load_sql_menu.return_button.clicked.connect(
-            self.load_sql_menu_to_modify_scene)
+        self.load_custom_types_menu.return_button.clicked.connect(
+            self.load_custom_types_menu_to_modify_scene)
         self.data_generation_menu.return_button.clicked.connect(
             self.data_generation_to_modify_scene)
 
@@ -191,8 +190,8 @@ class Main_window(QMainWindow, Ui_MainWindow):
         self.arrived_at_data_generation.emit()
         self.views_stack.setCurrentWidget(self.data_generation_menu)
 
-    def load_sql_menu_to_modify_scene(self):
-        self.views_stack.setCurrentWidget(self.modify_scene_menu)
+    def load_custom_types_menu_to_modify_scene(self):
+        self.views_stack.setCurrentWidget(self.admin_menu)
 
     def data_generation_to_modify_scene(self):
         self.views_stack.setCurrentWidget(self.modify_scene_menu)
