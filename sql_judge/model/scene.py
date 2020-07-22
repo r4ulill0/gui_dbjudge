@@ -1,8 +1,9 @@
 
 class Scene():
     def __init__(self):
-        self.name =
-        self.loaded_sql =
+        self.name = None
+        self.loaded_sql = None
+        self.context = None
         self.questions = []
 
     def add_question(self, question_text, proposed_answer):

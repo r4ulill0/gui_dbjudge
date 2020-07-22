@@ -59,26 +59,25 @@ class Main_window(QMainWindow, Ui_MainWindow):
         self.main_controller = Main_controller(self)
         # self.load_sql_controller = Load_sql_controller(self.load_sql_menu)
         self.new_scene_controller = New_scene_controller(
-            self.main_controller, self.new_scene_menu_schema)
-        self.load_custom_types_controller = Load_custom_types_controller(
-            self.load_custom_types_menu)
-        self.modify_scene_controller = Modify_scene_controller(
-            self.modify_scene_menu)
-        self.data_generation_controller = Data_generation_controller(
-            self.new_scene_menu_datagen)
+            self.main_controller, self.new_scene_menu_schema, self.new_scene_menu_datagen, self.new_scene_menu_questions)
+        # self.load_custom_types_controller = Load_custom_types_controller(
+        #     self.load_custom_types_menu)
+        # self.modify_scene_controller = Modify_scene_controller(
+        #     self.modify_scene_menu)
+        # self.data_generation_controller = Data_generation_controller(
+        #     self.new_scene_menu_datagen)
         # self.data_generation_controller = Data_generation_controller(
         #     self.data_generation_menu)
-        # TODO add controller for new_scene_data_gen
 
         # connect signals
-        self.arrived_at_modify_scene.connect(
-            self.modify_scene_controller.load_scenes)
+        # self.arrived_at_modify_scene.connect(
+        #     self.modify_scene_controller.load_scenes)
         self.arrived_at_data_generation.connect(
-            self.data_generation_controller.load_scene_data)
+            self.new_scene_controller.load_scene_data)
         # self.moved_with_selected_scene.connect(
         #     self.load_sql_controller.load_scene_name)
-        self.moved_with_selected_scene.connect(
-            self.data_generation_controller.load_scene_name)
+        # self.moved_with_selected_scene.connect(
+        #     self.data_generation_controller.load_scene_name)
 
         # connect transition elements
         self.main_menu.admin_menu_button.clicked.connect(
@@ -97,7 +96,7 @@ class Main_window(QMainWindow, Ui_MainWindow):
         self.new_scene_menu_schema.return_button.clicked.connect(
             self.new_scene_to_admin_menu)
         self.new_scene_menu_schema.navbar_gen_data.clicked.connect(
-            self.news_scene_schema_to_new_scen_datagen)
+            self.news_scene_schema_to_new_scene_datagen)
         self.new_scene_menu_datagen.return_button.clicked.connect(
             self.new_scene_to_admin_menu)
         self.new_scene_menu_datagen.navbar_schema.clicked.connect(
@@ -110,16 +109,16 @@ class Main_window(QMainWindow, Ui_MainWindow):
             self.new_scene_menu_questions_to_datagen)
         self.new_scene_menu_questions.return_button.clicked.connect(
             self.new_scene_to_admin_menu)
-        self.modify_scene_menu.return_button.clicked.connect(
-            self.modify_scene_to_admin_menu)
-        self.modify_scene_menu.load_sql_button.clicked.connect(
-            self.modify_scene_to_load_sql)
-        self.modify_scene_menu.generate_data_button.clicked.connect(
-            self.modify_scene_to_data_generation)
-        self.load_custom_types_menu.return_button.clicked.connect(
-            self.load_custom_types_menu_to_modify_scene)
-        self.data_generation_menu.return_button.clicked.connect(
-            self.data_generation_to_modify_scene)
+        # self.modify_scene_menu.return_button.clicked.connect(
+        #     self.modify_scene_to_admin_menu)
+        # self.modify_scene_menu.load_sql_button.clicked.connect(
+        #     self.modify_scene_to_load_sql)
+        # self.modify_scene_menu.generate_data_button.clicked.connect(
+        #     self.modify_scene_to_data_generation)
+        # self.load_custom_types_menu.return_button.clicked.connect(
+        #     self.load_custom_types_menu_to_modify_scene)
+        # self.data_generation_menu.return_button.clicked.connect(
+        #     self.data_generation_to_modify_scene)
 
         # set first menu visible
         self.setCentralWidget(self.views_stack)
@@ -138,7 +137,8 @@ class Main_window(QMainWindow, Ui_MainWindow):
         self.views_stack.setCurrentWidget(self.new_scene_menu_schema)
 
     @pyqtSlot(bool)
-    def news_scene_schema_to_new_scen_datagen(self):
+    def news_scene_schema_to_new_scene_datagen(self):
+        self.arrived_at_data_generation.emit()
         self.views_stack.setCurrentWidget(self.new_scene_menu_datagen)
 
     @pyqtSlot(bool)
@@ -151,7 +151,6 @@ class Main_window(QMainWindow, Ui_MainWindow):
 
     @pyqtSlot(bool)
     def admin_menu_to_create_scene_menu(self):
-        self.arrived_at_modify_scene.emit()
         self.views_stack.setCurrentWidget(self.modify_scene_menu)
 
     @pyqtSlot(bool)
@@ -168,6 +167,7 @@ class Main_window(QMainWindow, Ui_MainWindow):
 
     @pyqtSlot(bool)
     def new_scene_menu_datagen_to_questions(self):
+        self.arrived_at_data_generation.emit()
         self.views_stack.setCurrentWidget(self.new_scene_menu_questions)
 
     @pyqtSlot(bool)
@@ -178,20 +178,20 @@ class Main_window(QMainWindow, Ui_MainWindow):
     def new_scene_menu_questions_to_datagen(self):
         self.views_stack.setCurrentWidget(self.new_scene_menu_datagen)
 
-    @pyqtSlot(bool)
-    def modify_scene_to_load_sql(self):
-        self.moved_with_selected_scene.emit(
-            self.modify_scene_menu.get_selected_scene())
-        self.views_stack.setCurrentWidget(self.load_sql_menu)
+    # @pyqtSlot(bool)
+    # def modify_scene_to_load_sql(self):
+    #     self.moved_with_selected_scene.emit(
+    #         self.modify_scene_menu.get_selected_scene())
+    #     self.views_stack.setCurrentWidget(self.load_sql_menu)
 
-    def modify_scene_to_data_generation(self):
-        self.moved_with_selected_scene.emit(
-            self.modify_scene_menu.get_selected_scene())
-        self.arrived_at_data_generation.emit()
-        self.views_stack.setCurrentWidget(self.data_generation_menu)
+    # def modify_scene_to_data_generation(self):
+    #     self.moved_with_selected_scene.emit(
+    #         self.modify_scene_menu.get_selected_scene())
+    #     self.arrived_at_data_generation.emit()
+    #     self.views_stack.setCurrentWidget(self.data_generation_menu)
 
-    def load_custom_types_menu_to_modify_scene(self):
-        self.views_stack.setCurrentWidget(self.admin_menu)
+    # def load_custom_types_menu_to_modify_scene(self):
+    #     self.views_stack.setCurrentWidget(self.admin_menu)
 
-    def data_generation_to_modify_scene(self):
-        self.views_stack.setCurrentWidget(self.modify_scene_menu)
+    # def data_generation_to_modify_scene(self):
+    #     self.views_stack.setCurrentWidget(self.modify_scene_menu)

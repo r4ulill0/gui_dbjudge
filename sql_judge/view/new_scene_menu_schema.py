@@ -12,7 +12,7 @@ class New_scene_menu_schema(Ui_NewSceneMenuSchema, QWidget):
         self.load_file_button.clicked.connect(self.file_load)
 
     def get_scene_name_text(self):
-        return self.scene_name_input_text.text()
+        return self.scene_name_input.text()
 
     @pyqtSlot(bool)
     def file_load(self):
@@ -26,3 +26,6 @@ class New_scene_menu_schema(Ui_NewSceneMenuSchema, QWidget):
                 with open(file_name) as sql:
                     for line in sql.readlines():
                         self.text_editor.appendPlainText(line)
+
+    def get_ddl_text(self):
+        return self.text_editor.toPlainText()

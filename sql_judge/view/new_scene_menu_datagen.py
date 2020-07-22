@@ -7,7 +7,3 @@ class New_scene_menu_datagen(Ui_NewSceneMenuDatagen, QWidget):
         super().__init__()
 
         self.setupUi(self)
-
-    # TODO check if this method is used
-    def get_scene_name_text(self):
-        return self.scene_name_input_text.text()
