@@ -1,6 +1,6 @@
 from PyQt5.QtCore import QObject, pyqtSlot
 from dbjudge.connection_manager.manager import Manager
-from dbjudge.filler import fake_data_gen as filler
+from dbjudge import filler
 from dbjudge import squema_recollector
 from dbjudge.structures.fake_types import Regex, Custom, Default
 from view.new_scene_menu_schema import New_scene_menu_schema
@@ -19,6 +19,10 @@ class New_scene_controller(QObject):
         self.model = Scene()
 
         self.view_schema.confirm_button.clicked.connect(self.create_new_scene)
+        self.view_questions.add_question_button.clicked.connect(
+            self.add_question)
+        self.view_questions.finish_button.clicked.connect(
+            self.finish_scene_creation)
         self.new_scene_event()
 
     def new_scene_event(self):
@@ -78,6 +82,13 @@ class New_scene_controller(QObject):
 
 # QUESTIONS
 
+    def add_question(self):
+        question = self.view_questions.get_question_text()
+        answer = self.view_questions.get_answer_text()
+        self.model.questions.append((question, answer))
+        self.view_questions.add_question(question, answer)
 
-def save_questions(self):
-    pass
+    def finish_scene_creation(self):
+        # TODO progress popup
+        filler.generate_fake_data(
+            self.model.context, self.manager.selected_db_connection)
