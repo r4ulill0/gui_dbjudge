@@ -92,3 +92,4 @@ class New_scene_controller(QObject):
         # TODO progress popup
         filler.generate_fake_data(
             self.model.context, self.manager.selected_db_connection)
+        # TODO load questions and generate extra data

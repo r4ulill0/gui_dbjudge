@@ -60,8 +60,8 @@ class Main_window(QMainWindow, Ui_MainWindow):
         # self.load_sql_controller = Load_sql_controller(self.load_sql_menu)
         self.new_scene_controller = New_scene_controller(
             self.main_controller, self.new_scene_menu_schema, self.new_scene_menu_datagen, self.new_scene_menu_questions)
-        # self.load_custom_types_controller = Load_custom_types_controller(
-        #     self.load_custom_types_menu)
+        self.load_custom_types_controller = Load_custom_types_controller(
+            self.load_custom_types_menu)
         # self.modify_scene_controller = Modify_scene_controller(
         #     self.modify_scene_menu)
         # self.data_generation_controller = Data_generation_controller(
