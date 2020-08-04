@@ -5,6 +5,7 @@ from PyQt5.QtCore import pyqtSignal
 
 from view.qt_view.main_window_view import Ui_MainWindow
 from view.main_menu import Main_menu
+from view.user_menu import User_menu
 from view.admin_menu import Admin_menu
 from view.new_scene_menu_schema import New_scene_menu_schema
 from view.new_scene_menu_datagen import New_scene_menu_datagen
@@ -34,6 +35,7 @@ class Main_window(QMainWindow, Ui_MainWindow):
 
         # define views
         self.main_menu = Main_menu()
+        self.user_menu = User_menu()
         self.admin_menu = Admin_menu()
         self.load_custom_types_menu = Load_custom_types_menu()
         self.modify_scene_menu = Modify_scene_menu()
@@ -46,6 +48,7 @@ class Main_window(QMainWindow, Ui_MainWindow):
         self.views_stack = QStackedWidget(self)
 
         self.views_stack.addWidget(self.main_menu)
+        self.views_stack.addWidget(self.user_menu)
         self.views_stack.addWidget(self.admin_menu)
         self.views_stack.addWidget(self.load_custom_types_menu)
         self.views_stack.addWidget(self.modify_scene_menu)
@@ -80,6 +83,8 @@ class Main_window(QMainWindow, Ui_MainWindow):
         #     self.data_generation_controller.load_scene_name)
 
         # connect transition elements
+        self.main_menu.user_menu_button.clicked.connect(
+            self.main_menu_to_user_menu)
         self.main_menu.admin_menu_button.clicked.connect(
             self.main_menu_to_admin_menu)
         # self.main_menu.user_menu_button.clicked.connect()
@@ -123,6 +128,10 @@ class Main_window(QMainWindow, Ui_MainWindow):
         # set first menu visible
         self.setCentralWidget(self.views_stack)
         self.views_stack.setCurrentWidget(self.main_menu)
+
+    @pyqtSlot(bool)
+    def main_menu_to_user_menu(self):
+        self.views_stack.setCurrentWidget(self.user_menu)
 
     @pyqtSlot(bool)
     def main_menu_to_admin_menu(self):
