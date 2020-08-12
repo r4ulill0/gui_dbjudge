@@ -64,7 +64,7 @@ class Main_window(QMainWindow, Ui_MainWindow):
 
         # load controllers
         self.main_controller = Main_controller(self)
-        self.exam_controller = Exam_controller(self.exam)
+        self.exam_controller = Exam_controller(self.user_menu, self.exam)
         # self.load_sql_controller = Load_sql_controller(self.load_sql_menu)
         self.new_scene_controller = New_scene_controller(
             self.main_controller, self.new_scene_menu_schema, self.new_scene_menu_datagen, self.new_scene_menu_questions)
@@ -92,6 +92,10 @@ class Main_window(QMainWindow, Ui_MainWindow):
             self.main_menu_to_user_menu)
         self.user_menu.access_button.clicked.connect(
             self.user_menu_to_exam)
+        self.user_menu.return_button.clicked.connect(
+            self.user_menu_to_main_menu)
+        self.exam.exit_button.clicked.connect(
+            self.exam_to_user_menu)
         self.main_menu.admin_menu_button.clicked.connect(
             self.main_menu_to_admin_menu)
         # self.main_menu.user_menu_button.clicked.connect()
@@ -121,6 +125,8 @@ class Main_window(QMainWindow, Ui_MainWindow):
             self.new_scene_menu_questions_to_datagen)
         self.new_scene_menu_questions.return_button.clicked.connect(
             self.new_scene_to_admin_menu)
+        self.load_custom_types_menu.return_button.clicked.connect(
+            self.load_custom_types_menu_to_admin_menu)
         # self.modify_scene_menu.return_button.clicked.connect(
         #     self.modify_scene_to_admin_menu)
         # self.modify_scene_menu.load_sql_button.clicked.connect(
@@ -140,8 +146,17 @@ class Main_window(QMainWindow, Ui_MainWindow):
     def main_menu_to_user_menu(self):
         self.views_stack.setCurrentWidget(self.user_menu)
 
+    @pyqtSlot(bool)
     def user_menu_to_exam(self):
         self.views_stack.setCurrentWidget(self.exam)
+
+    @pyqtSlot(bool)
+    def user_menu_to_main_menu(self):
+        self.views_stack.setCurrentWidget(self.main_menu)
+
+    @pyqtSlot(bool)
+    def exam_to_user_menu(self):
+        self.views_stack.setCurrentWidget(self.user_menu)
 
     @pyqtSlot(bool)
     def main_menu_to_admin_menu(self):
@@ -209,8 +224,8 @@ class Main_window(QMainWindow, Ui_MainWindow):
     #     self.arrived_at_data_generation.emit()
     #     self.views_stack.setCurrentWidget(self.data_generation_menu)
 
-    # def load_custom_types_menu_to_modify_scene(self):
-    #     self.views_stack.setCurrentWidget(self.admin_menu)
+    def load_custom_types_menu_to_admin_menu(self):
+        self.views_stack.setCurrentWidget(self.admin_menu)
 
     # def data_generation_to_modify_scene(self):
     #     self.views_stack.setCurrentWidget(self.modify_scene_menu)

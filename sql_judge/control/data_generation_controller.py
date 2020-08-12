@@ -1,4 +1,3 @@
-import sys
 from view.data_generation.table_data_generation_tab import Table_data_generation_tab
 
 from dbjudge import squema_recollector
@@ -49,7 +48,7 @@ class Data_generation_controller(QObject):
         conn = Manager.singleton_instance.selected_db_connection
         self.context = squema_recollector.create_context(conn)
         self.main_view.tabWidget.clear()
-        for index, table in enumerate(self.context.tables):
+        for _, table in enumerate(self.context.tables):
             new_tab_page = Table_data_generation_tab(
                 table)
             new_tab_page.table_data_modified.connect(self.update_type)
