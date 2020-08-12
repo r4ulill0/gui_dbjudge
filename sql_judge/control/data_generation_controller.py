@@ -1,7 +1,7 @@
 import sys
 from view.data_generation.table_data_generation_tab import Table_data_generation_tab
 
-from dbjudge import squemaGetter
+from dbjudge import squema_recollector
 from dbjudge import filler
 from dbjudge.connection_manager.manager import Manager
 from dbjudge.structures.fake_types import Regex, Default, Custom
@@ -47,7 +47,7 @@ class Data_generation_controller(QObject):
     def load_scene_data(self):
         Manager.singleton_instance.select_database(self.scene_name)
         conn = Manager.singleton_instance.selected_db_connection
-        self.context = squemaGetter.create_context(conn)
+        self.context = squema_recollector.create_context(conn)
         self.main_view.tabWidget.clear()
         for index, table in enumerate(self.context.tables):
             new_tab_page = Table_data_generation_tab(

@@ -1,6 +1,6 @@
 import sys
 
-from dbjudge import squemaGetter
+from dbjudge import squema_recollector
 from dbjudge.connection_manager.manager import Manager
 
 from PyQt5.QtCore import QObject, pyqtSlot
