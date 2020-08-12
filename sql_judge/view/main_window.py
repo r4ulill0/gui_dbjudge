@@ -16,6 +16,7 @@ from view.load_custom_types_menu import Load_custom_types_menu
 from view.modify_scene_menu import Modify_scene_menu
 from view.data_generation_menu import Data_generation_menu
 from control.main_controller import Main_controller
+from control.exam_controller import Exam_controller
 from control.load_custom_types_controller import Load_custom_types_controller
 from control.load_sql_controller import Load_sql_controller
 from control.new_scene_controller import New_scene_controller
@@ -63,6 +64,7 @@ class Main_window(QMainWindow, Ui_MainWindow):
 
         # load controllers
         self.main_controller = Main_controller(self)
+        self.exam_controller = Exam_controller(self.exam)
         # self.load_sql_controller = Load_sql_controller(self.load_sql_menu)
         self.new_scene_controller = New_scene_controller(
             self.main_controller, self.new_scene_menu_schema, self.new_scene_menu_datagen, self.new_scene_menu_questions)
