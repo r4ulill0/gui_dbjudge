@@ -3,6 +3,7 @@ from dbjudge.connection_manager.manager import Manager
 from dbjudge import filler
 from dbjudge import squema_recollector
 from dbjudge.structures.fake_types import Regex, Custom, Default
+from dbjudge.questions.generation import generator
 from view.new_scene_menu_schema import New_scene_menu_schema
 from view.data_generation.table_data_generation_tab import Table_data_generation_tab
 from model.scene import Scene
@@ -74,7 +75,7 @@ class New_scene_controller(QObject):
             self.model.context = squema_recollector.create_context(conn)
 
         self.view_data_gen.tabWidget.clear()
-        for index, table in enumerate(self.model.context.tables):
+        for _, table in enumerate(self.model.context.tables):
             new_tab_page = Table_data_generation_tab(
                 table)
             new_tab_page.table_data_modified.connect(self.update_type)
@@ -92,4 +93,7 @@ class New_scene_controller(QObject):
         # TODO progress popup
         filler.generate_fake_data(
             self.model.context, self.manager.selected_db_connection)
-        # TODO load questions and generate extra data
+        for question, query in self.model.questions:
+            generator.create_question(
+                self.model.name, query, question, self.model.context)
+        # TODO Show popup with "created message" after creation, then redirection to admin menu
