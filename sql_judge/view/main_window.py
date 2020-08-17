@@ -145,6 +145,7 @@ class Main_window(QMainWindow, Ui_MainWindow):
     @pyqtSlot(bool)
     def main_menu_to_user_menu(self):
         self.views_stack.setCurrentWidget(self.user_menu)
+        self.exam_controller.load_avaiable_scenarios()
 
     @pyqtSlot(bool)
     def user_menu_to_exam(self):
