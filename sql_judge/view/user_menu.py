@@ -11,3 +11,8 @@ class User_menu(Ui_PreEvaluationView, QWidget):
         self.scenario_selection.clear()
         for scenario in scenarios:
             self.scenario_selection.addItem(scenario)
+
+    def update_scenario_data(self, total_tables, total_questions, total_rows):
+        self.data_table.item(0, 1).setText(str(total_tables))
+        self.data_table.item(1, 1).setText(str(total_questions))
+        self.data_table.item(2, 1).setText(str(total_rows))

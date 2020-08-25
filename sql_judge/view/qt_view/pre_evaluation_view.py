@@ -54,6 +54,8 @@ class Ui_PreEvaluationView(object):
         self.data_table.setItem(1, 1, item)
         item = QtWidgets.QTableWidgetItem()
         self.data_table.setItem(2, 0, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.data_table.setItem(2, 1, item)
         self.data_table.horizontalHeader().setVisible(False)
         self.data_table.horizontalHeader().setCascadingSectionResizes(False)
         self.data_table.horizontalHeader().setHighlightSections(False)
