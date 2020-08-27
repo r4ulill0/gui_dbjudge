@@ -7,6 +7,7 @@ class ExamData:
         self.data = None
         self.selected_scenario = None
         self.scenarios = None
+        self.current_question = 0
         self._questions = QuestionSet()
 
     @property

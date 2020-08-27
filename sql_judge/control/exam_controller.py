@@ -15,6 +15,8 @@ class Exam_controller():
         self.selection_view.scenario_selection.currentTextChanged.connect(
             self.update_scenario_data)
         self.exam_view.question_list.setModel(self.model.questions)
+        self.exam_view.question_list.selectionModel(
+        ).currentRowChanged.connect(self.update_current_question)
 
     def load_avaiable_scenarios(self):
         self.model.scenarios = self.manager.get_databases()
@@ -31,3 +33,8 @@ class Exam_controller():
             total_rows = tuples
             self.selection_view.update_scenario_data(
                 total_tables, total_questions, total_rows)
+
+    def update_current_question(self, index):
+        self.exam_view.update_current_question(
+            self.model.questions.question_list[index.row()])
+        self.model.current_question = index.row()

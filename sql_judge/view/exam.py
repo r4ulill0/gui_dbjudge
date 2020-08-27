@@ -6,3 +6,6 @@ class Exam(Ui_Exam, QWidget):
     def __init__(self):
         super().__init__()
         self.setupUi(self)
+
+    def update_current_question(self, question_text):
+        self.question.setText(question_text)
