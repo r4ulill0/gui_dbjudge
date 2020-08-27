@@ -35,6 +35,10 @@ class Exam_controller():
                 total_tables, total_questions, total_rows)
 
     def update_current_question(self, index):
+        self.model.questions.answers[self.model.current_question] = self.exam_view.get_answer_text(
+        )
         self.exam_view.update_current_question(
             self.model.questions.question_list[index.row()])
+        self.exam_view.set_answer_text(
+            self.model.questions.answers[index.row()])
         self.model.current_question = index.row()

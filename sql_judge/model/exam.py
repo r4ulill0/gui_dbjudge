@@ -27,6 +27,7 @@ class QuestionSet(QAbstractListModel):
     def __init__(self, questions=[]):
         super().__init__()
         self.question_list = questions
+        self.answers = {}
 
     def rowCount(self, parent=QModelIndex()):
         return len(self.question_list)

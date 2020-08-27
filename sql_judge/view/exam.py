@@ -9,3 +9,9 @@ class Exam(Ui_Exam, QWidget):
 
     def update_current_question(self, question_text):
         self.question.setText(question_text)
+
+    def get_answer_text(self):
+        return self.plainTextEdit.toPlainText()
+
+    def set_answer_text(self, text):
+        self.plainTextEdit.setPlainText(text)
