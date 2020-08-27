@@ -22,8 +22,6 @@ class New_scene_controller(QObject):
         self.view_schema.confirm_button.clicked.connect(self.create_new_scene)
         self.view_questions.add_question_button.clicked.connect(
             self.add_question)
-        self.view_questions.finish_button.clicked.connect(
-            self.finish_scene_creation)
         self.new_scene_event()
 
     def new_scene_event(self):
