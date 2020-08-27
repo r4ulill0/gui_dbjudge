@@ -15,3 +15,6 @@ class Exam(Ui_Exam, QWidget):
 
     def set_answer_text(self, text):
         self.plainTextEdit.setPlainText(text)
+
+    def set_console_output(self, text):
+        self.database_output.append(text)

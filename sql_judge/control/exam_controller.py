@@ -14,6 +14,7 @@ class Exam_controller():
 
         self.selection_view.scenario_selection.currentTextChanged.connect(
             self.update_scenario_data)
+        self.exam_view.test_button.clicked.connect(self.try_answer)
         self.exam_view.question_list.setModel(self.model.questions)
         self.exam_view.question_list.selectionModel(
         ).currentRowChanged.connect(self.update_current_question)
@@ -42,3 +43,12 @@ class Exam_controller():
         self.exam_view.set_answer_text(
             self.model.questions.answers[index.row()])
         self.model.current_question = index.row()
+
+    def try_answer(self):
+        answer = self.exam_view.get_answer_text()
+        response = self.manager.execute_in_readonly(answer)
+        for row in response:
+            complete_row = ''
+            for element in row:
+                complete_row += ' '+str(element)
+            self.exam_view.set_console_output(complete_row)
