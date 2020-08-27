@@ -16,7 +16,11 @@ class ExamData:
 
     @questions.setter
     def questions(self, value):
+        self.questions.beginResetModel()
         self._questions.question_list = value
+        for index, _ in enumerate(value):
+            self._questions.answers[index] = ""
+        self.questions.endResetModel()
 
 
 class QuestionSet(QAbstractListModel):
