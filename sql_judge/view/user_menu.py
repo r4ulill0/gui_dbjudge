@@ -7,6 +7,9 @@ class User_menu(Ui_PreEvaluationView, QWidget):
         super().__init__()
         self.setupUi(self)
 
+    def get_current_scenario(self):
+        return self.scenario_selection.currentText()
+
     def load_scenarios(self, scenarios):
         self.scenario_selection.clear()
         for scenario in scenarios:

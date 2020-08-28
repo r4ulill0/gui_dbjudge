@@ -14,6 +14,8 @@ class Exam_controller():
 
         self.selection_view.scenario_selection.currentTextChanged.connect(
             self.update_scenario_data)
+        self.selection_view.access_button.clicked.connect(
+            self.update_scenario_data)
         self.exam_view.test_button.clicked.connect(self.try_answer)
         self.exam_view.question_list.setModel(self.model.questions)
         self.exam_view.question_list.selectionModel(
@@ -24,7 +26,8 @@ class Exam_controller():
         self.selection_view.load_scenarios(self.model.scenarios)
 
     def update_scenario_data(self, scenario):
-        if (scenario):
+        scenario = self.selection_view.get_current_scenario()
+        if scenario:
             self.manager.select_database(scenario)
             self.model.questions = self.manager.get_questions()
             tables = self.manager.get_tables()
