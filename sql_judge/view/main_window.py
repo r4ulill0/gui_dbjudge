@@ -159,6 +159,7 @@ class Main_window(QMainWindow, Ui_MainWindow):
 
     @pyqtSlot(bool)
     def exam_to_user_menu(self):
+        self.exam.clear_ui()
         self.views_stack.setCurrentWidget(self.user_menu)
 
     @pyqtSlot(bool)

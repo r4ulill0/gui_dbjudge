@@ -18,3 +18,7 @@ class Exam(Ui_Exam, QWidget):
 
     def set_console_output(self, text):
         self.database_output.append(text)
+
+    def clear_ui(self):
+        self.database_output.clear()
+        self.plainTextEdit.clear()
