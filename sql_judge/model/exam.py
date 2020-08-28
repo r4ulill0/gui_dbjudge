@@ -1,6 +1,8 @@
 from PyQt5.QtCore import QAbstractListModel, QAbstractItemModel
 from PyQt5.QtCore import Qt, QModelIndex, pyqtSlot
 
+from dbjudge.judge.judge import Judge
+
 
 class ExamData:
     def __init__(self):
@@ -8,6 +10,7 @@ class ExamData:
         self.selected_scenario = None
         self.scenarios = None
         self.current_question = 0
+        self._judge = Judge()
         self._questions = QuestionSet()
 
     @property
@@ -16,18 +19,23 @@ class ExamData:
 
     @questions.setter
     def questions(self, value):
+        self._judge.start_session(value)
         self.questions.beginResetModel()
         self._questions.question_list = value
-        for index, _ in enumerate(value):
-            self._questions.answers[index] = ""
         self.questions.endResetModel()
+
+    @property
+    def answers(self):
+        if self._judge.session:
+            return self._judge.session.mapped_answers
+        else:
+            return {}
 
 
 class QuestionSet(QAbstractListModel):
     def __init__(self, questions=[]):
         super().__init__()
         self.question_list = questions
-        self.answers = {}
 
     def rowCount(self, parent=QModelIndex()):
         return len(self.question_list)
