@@ -1,7 +1,7 @@
 from model.exam import ExamData
 
 from dbjudge.connection_manager.manager import Manager
-from dbjudge import squema_recollector
+from dbjudge import squema_recollector, exceptions
 from PyQt5.QtCore import pyqtSlot
 
 
@@ -46,9 +46,13 @@ class Exam_controller():
 
     def try_answer(self):
         answer = self.exam_view.get_answer_text()
-        response = self.manager.execute_in_readonly(answer)
-        for row in response:
-            complete_row = ''
-            for element in row:
-                complete_row += ' '+str(element)
-            self.exam_view.set_console_output(complete_row)
+        try:
+            response = self.manager.execute_in_readonly(answer)
+            for row in response:
+                complete_row = ''
+                for element in row:
+                    complete_row += ' '+str(element)
+                self.exam_view.set_console_output(complete_row)
+        except exceptions.ReadOnlyError:
+            error_message = 'Error sintáctico detectado, revisa tu consulta'
+            self.exam_view.set_console_output(error_message)
