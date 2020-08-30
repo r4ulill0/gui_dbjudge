@@ -45,9 +45,9 @@
      <item row="2" column="2" rowspan="3" colspan="5">
       <widget class="QWidget" name="question_stats" native="true">
        <property name="sizePolicy">
-        <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
          <horstretch>3</horstretch>
-         <verstretch>1</verstretch>
+         <verstretch>2</verstretch>
         </sizepolicy>
        </property>
        <layout class="QGridLayout" name="gridLayout_2">
@@ -97,6 +97,9 @@
           <property name="layoutDirection">
            <enum>Qt::RightToLeft</enum>
           </property>
+          <property name="itemAlignment">
+           <set>Qt::AlignLeading</set>
+          </property>
          </widget>
         </item>
         <item row="5" column="0">
@@ -117,10 +120,16 @@
           <property name="layoutDirection">
            <enum>Qt::RightToLeft</enum>
           </property>
+          <property name="itemAlignment">
+           <set>Qt::AlignLeading</set>
+          </property>
          </widget>
         </item>
         <item row="2" column="0" colspan="3">
          <layout class="QHBoxLayout" name="horizontalLayout">
+          <property name="spacing">
+           <number>20</number>
+          </property>
           <item>
            <widget class="QLabel" name="label">
             <property name="sizePolicy">
@@ -142,8 +151,15 @@
               <verstretch>0</verstretch>
              </sizepolicy>
             </property>
+            <property name="font">
+             <font>
+              <pointsize>16</pointsize>
+              <weight>75</weight>
+              <bold>true</bold>
+             </font>
+            </property>
             <property name="text">
-             <string/>
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p/&gt;&lt;/body&gt;&lt;/html&gt;</string>
             </property>
            </widget>
           </item>
@@ -151,6 +167,9 @@
         </item>
         <item row="3" column="0" colspan="3">
          <layout class="QHBoxLayout" name="horizontalLayout_2">
+          <property name="spacing">
+           <number>20</number>
+          </property>
           <property name="topMargin">
            <number>0</number>
           </property>
@@ -175,8 +194,15 @@
               <verstretch>0</verstretch>
              </sizepolicy>
             </property>
+            <property name="font">
+             <font>
+              <pointsize>16</pointsize>
+              <weight>75</weight>
+              <bold>true</bold>
+             </font>
+            </property>
             <property name="text">
-             <string/>
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:16pt;&quot;/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
             </property>
            </widget>
           </item>
@@ -218,29 +244,18 @@
      <item row="1" column="3" colspan="4">
       <widget class="QLabel" name="question">
        <property name="sizePolicy">
-        <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+        <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
          <horstretch>0</horstretch>
          <verstretch>0</verstretch>
         </sizepolicy>
        </property>
+       <property name="font">
+        <font>
+         <pointsize>13</pointsize>
+        </font>
+       </property>
        <property name="text">
         <string/>
-       </property>
-      </widget>
-     </item>
-     <item row="2" column="0" rowspan="3">
-      <widget class="QListView" name="question_list">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
-         <horstretch>1</horstretch>
-         <verstretch>1</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="sizeIncrement">
-        <size>
-         <width>0</width>
-         <height>0</height>
-        </size>
        </property>
       </widget>
      </item>
@@ -272,6 +287,22 @@
         </size>
        </property>
       </spacer>
+     </item>
+     <item row="1" column="0" rowspan="4">
+      <widget class="QListView" name="question_list">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
+         <horstretch>1</horstretch>
+         <verstretch>1</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="sizeIncrement">
+        <size>
+         <width>0</width>
+         <height>0</height>
+        </size>
+       </property>
+      </widget>
      </item>
     </layout>
    </item>

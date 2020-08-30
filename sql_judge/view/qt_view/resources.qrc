@@ -5,4 +5,10 @@
 <qresource>
     <file>../icons/trash-26.png</file>
 </qresource>
+<qresource>
+    <file>../icons/no-48.png</file>
+</qresource>
+<qresource>
+    <file>../icons/yes-64.png</file>
+</qresource>
 </RCC>

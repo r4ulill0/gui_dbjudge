@@ -17,10 +17,18 @@ class Exam_controller():
             self.update_scenario_data)
         self.selection_view.access_button.clicked.connect(
             self.update_scenario_data)
+
         self.exam_view.test_button.clicked.connect(self.try_answer)
         self.exam_view.question_list.setModel(self.model.questions)
-        self.exam_view.question_list.selectionModel(
-        ).currentRowChanged.connect(self.update_current_question)
+        self.exam_view.question_list.selectionModel().currentRowChanged.connect(
+            self.update_current_exam_question)
+
+        self.exam_view.generate_report_button.clicked.connect(
+            self.finish_exam)
+
+        self.results_view.question_list.setModel(self.model.questions)
+        self.results_view.question_list.selectionModel().currentRowChanged.connect(
+            self.update_current_results_question)
 
     def load_avaiable_scenarios(self):
         self.model.scenarios = self.manager.get_databases()
@@ -39,9 +47,9 @@ class Exam_controller():
             self.selection_view.update_scenario_data(
                 total_tables, total_questions, total_rows)
 
-    def update_current_question(self, index):
-        self.model.answers[self.model.questions.question_list[self.model.current_question]] = self.exam_view.get_answer_text(
-        )
+    def update_current_exam_question(self, index):
+        self.model.answers[self.model.questions.question_list[self.model.current_question]
+                           ] = self.exam_view.get_answer_text()
         self.exam_view.update_current_question(
             self.model.questions.question_list[index.row()])
         self.exam_view.set_answer_text(
@@ -60,3 +68,22 @@ class Exam_controller():
         except exceptions.ReadOnlyError:
             error_message = 'Error sintáctico detectado, revisa tu consulta'
             self.exam_view.set_console_output(error_message)
+
+    def finish_exam(self):
+        self.model.answers[self.model.questions.question_list[self.model.current_question]
+                           ] = self.exam_view.get_answer_text()
+        self.exam_view.clear_ui()
+        self.model.generate_report()
+
+    def update_current_results_question(self, index):
+        question = self.model.questions.question_list[index.row()]
+        self.results_view.update_current_question(question)
+        self.results_view.update_correct_result(
+            self.model.report[question].correct_result)
+        self.results_view.update_correct_answer(
+            self.model.report[question].is_correct())
+        self.results_view.update_excess_tables(
+            self.model.report[question].excess_tables_used)
+        self.results_view.update_keywords(
+            self.model.report[question].expected_keywords, self.model.report[question].used_keywords)
+        self.model.current_question = index.row()

@@ -12,6 +12,7 @@ class ExamData:
         self.current_question = 0
         self._judge = Judge()
         self._questions = QuestionSet()
+        self.report = {}
 
     @property
     def questions(self):
@@ -30,6 +31,9 @@ class ExamData:
             return self._judge.session.mapped_answers
         else:
             return {}
+
+    def generate_report(self):
+        self.report = self._judge.generate_report()
 
 
 class QuestionSet(QAbstractListModel):
