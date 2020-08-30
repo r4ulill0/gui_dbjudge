@@ -76,7 +76,16 @@ class Exam_controller():
         self.model.generate_report()
 
     def update_current_results_question(self, index):
+        correct_answers_count = 0
+        total_count = 0
+        for question, analysis in self.model.report.items():
+            if analysis.is_correct():
+                correct_answers_count += 1
+            total_count += 1
+
         question = self.model.questions.question_list[index.row()]
+        self.results_view.update_total_count(
+            correct_answers_count, total_count)
         self.results_view.update_current_question(question)
         self.results_view.update_correct_result(
             self.model.report[question].correct_result)

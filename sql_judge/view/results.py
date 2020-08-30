@@ -8,6 +8,10 @@ class Results(Ui_Results, QWidget):
         super().__init__()
         self.setupUi(self)
 
+    def update_total_count(self, correct_count, total_count):
+        text = '{}/{}'.format(correct_count, total_count)
+        self.total_result_label.setText(text)
+
     def update_current_question(self, new_question):
         self.question.setText(new_question)
 
