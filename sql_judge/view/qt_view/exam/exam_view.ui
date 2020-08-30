@@ -83,7 +83,7 @@
      </spacer>
     </item>
     <item row="5" column="4">
-     <widget class="QPushButton" name="pushButton">
+     <widget class="QPushButton" name="generate_report_button">
       <property name="text">
        <string>Terminar y corregir preguntas</string>
       </property>

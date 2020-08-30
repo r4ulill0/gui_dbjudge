@@ -6,9 +6,10 @@ from PyQt5.QtCore import pyqtSlot
 
 
 class Exam_controller():
-    def __init__(self, selection_view, exam_view):
+    def __init__(self, selection_view, exam_view, results_view):
         self.selection_view = selection_view
         self.exam_view = exam_view
+        self.results_view = results_view
         self.model = ExamData()
         self.manager = Manager.singleton_instance
 
