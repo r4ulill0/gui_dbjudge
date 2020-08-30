@@ -196,10 +196,6 @@ class Main_window(QMainWindow, Ui_MainWindow):
         self.views_stack.setCurrentWidget(self.new_scene_menu_datagen)
 
     @pyqtSlot(bool)
-    def new_scene_menu_datagen_to_schema(self):
-        self.views_stack.setCurrentWidget(self.new_scene_menu_schema)
-
-    @pyqtSlot(bool)
     def admin_menu_to_load_custom_types_menu(self):
         self.views_stack.setCurrentWidget(self.load_custom_types_menu)
 
