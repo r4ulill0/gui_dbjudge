@@ -313,8 +313,13 @@
            <verstretch>0</verstretch>
           </sizepolicy>
          </property>
+         <property name="font">
+          <font>
+           <pointsize>20</pointsize>
+          </font>
+         </property>
          <property name="text">
-          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          <string/>
          </property>
         </widget>
        </item>
@@ -332,7 +337,7 @@
           </font>
          </property>
          <property name="text">
-          <string>Preguntas contestadas correctamente</string>
+          <string>preguntas contestadas correctamente</string>
          </property>
         </widget>
        </item>

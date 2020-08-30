@@ -2,7 +2,7 @@ from model.exam import ExamData
 
 from dbjudge.connection_manager.manager import Manager
 from dbjudge import squema_recollector, exceptions
-from PyQt5.QtCore import pyqtSlot
+from PyQt5.QtCore import pyqtSlot, QItemSelectionModel
 
 
 class Exam_controller():
@@ -46,6 +46,10 @@ class Exam_controller():
             total_rows = tuples
             self.selection_view.update_scenario_data(
                 total_tables, total_questions, total_rows)
+            self.selection_view.access_button.setEnabled(total_questions > 0)
+        preselected_index = self.model.questions.index(0, 0)
+        self.exam_view.question_list.selectionModel().setCurrentIndex(
+            preselected_index, QItemSelectionModel.SelectionFlag.ClearAndSelect)
 
     def update_current_exam_question(self, index):
         self.model.answers[self.model.questions.question_list[self.model.current_question]
@@ -74,6 +78,9 @@ class Exam_controller():
                            ] = self.exam_view.get_answer_text()
         self.exam_view.clear_ui()
         self.model.generate_report()
+        preselected_index = self.model.questions.index(0, 0)
+        self.results_view.question_list.selectionModel().setCurrentIndex(
+            preselected_index, QItemSelectionModel.SelectionFlag.ClearAndSelect)
 
     def update_current_results_question(self, index):
         correct_answers_count = 0
