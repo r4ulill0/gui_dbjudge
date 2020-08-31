@@ -8,6 +8,9 @@ class LoadTypesProcess(QAbstractTableModel):
         self.csv_values = [[]]
         self.header_model = HeaderModel()
 
+    def index(self, row, column, parent=QModelIndex()):
+        return self.createIndex(row, column)
+
     def rowCount(self, parent=QModelIndex()):
         return len(self.csv_values)
 
@@ -53,14 +56,33 @@ class LoadTypesProcess(QAbstractTableModel):
         self.endInsertColumns()
         return True
 
+    def removeRows(self, position, rows, index=QModelIndex()):
+        self.beginRemoveRows(index, position, position+rows-1)
+        for row in reversed(range(position, position+rows)):
+            self.csv_values.pop(row)
+        self.endRemoveRows()
+
+    def removeColumns(self, position, columns, index=QModelIndex()):
+        self.beginRemoveColumns(index, position, position+columns-1)
+        delete_list = reversed(range(position, position+columns))
+        for row in self.csv_values:
+            for column in delete_list:
+                row.pop(column)
+
 
 class HeaderModel(QAbstractItemModel):
     def __init__(self):
         super().__init__()
         self.values = []
 
+    def index(self, row, column, parent=QModelIndex()):
+        return self.createIndex(row, column)
+
     def columnCount(self, parent=QModelIndex()):
         return len(self.values)
+
+    def rowCount(self, parent=QModelIndex()):
+        return 1
 
     def headerData(self, section, orientation, role=Qt.DisplayRole):
         if role == Qt.DisplayRole:
@@ -70,3 +92,7 @@ class HeaderModel(QAbstractItemModel):
         if role == Qt.EditRole:
             self.values[section] = value
 
+    def removeColumn(self, column, index=QModelIndex()):
+        self.beginRemoveColumns(index, column, column)
+        self.values.pop(column)
+        self.endRemoveColumns()

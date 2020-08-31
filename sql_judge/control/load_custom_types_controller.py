@@ -20,6 +20,8 @@ class Load_custom_types_controller(QObject):
         self.main_view.table.horizontalHeader().setModel(self.model.header_model)
 
         self.main_view.load_file_button.clicked.connect(self.import_csv_types)
+        self.main_view.add_button.clicked.connect(self.add_row)
+        self.main_view.delete_button.clicked.connect(self.delete_selection)
 
     @pyqtSlot(bool)
     def import_csv_types(self):
@@ -38,9 +40,20 @@ class Load_custom_types_controller(QObject):
                             self.model.header_model.endResetModel()
                         else:
                             self.model.csv_values.append(row)
-                    # for row_id, row in enumerate(values):
-                    #     for col_id, value in enumerate(row):
-                    #         self.model.
-                        # index = self.model.createIndex(row_id, col_id)
-                        # self.model.setData(index, value)
             self.model.endResetModel()
+
+    def add_row(self):
+        last_row = self.model.rowCount()
+        self.model.insertRows(last_row+1, 1)
+
+    def delete_selection(self):
+        selection = self.main_view.table.selectionModel()
+        if selection.hasSelection():
+            for column in range(self.model.columnCount()):
+                if selection.isColumnSelected(column):
+                    self.model.removeColumns(column, 1)
+                    self.model.header_model.removeColumn(column)
+
+            for row in range(self.model.rowCount()):
+                if selection.isRowSelected(row):
+                    self.model.removeRows(row, 1)
