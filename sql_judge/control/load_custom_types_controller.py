@@ -2,7 +2,6 @@ import sys
 import csv
 
 from dbjudge import squema_recollector
-from dbjudge.connection_manager.manager import Manager
 from dbjudge.custom_fakes import custom_loader
 
 from model.load_types import LoadTypesProcess
