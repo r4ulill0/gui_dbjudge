@@ -17,6 +17,7 @@ class Load_custom_types_controller(QObject):
         self.main_view = view
         self.model = LoadTypesProcess()
         self.main_view.table.setModel(self.model)
+        self.main_view.table.horizontalHeader().setModel(self.model.header_model)
 
         self.main_view.load_file_button.clicked.connect(self.import_csv_types)
 
@@ -30,8 +31,13 @@ class Load_custom_types_controller(QObject):
             for file_name in file_selector.selectedFiles():
                 with open(file_name) as csv_file:
                     values = csv.reader(csv_file)
-                    for row in values:
-                        self.model.csv_values.append(row)
+                    for idx, row in enumerate(values):
+                        if idx == 0:
+                            self.model.header_model.beginResetModel()
+                            self.model.header_model.values = row
+                            self.model.header_model.endResetModel()
+                        else:
+                            self.model.csv_values.append(row)
                     # for row_id, row in enumerate(values):
                     #     for col_id, value in enumerate(row):
                     #         self.model.
