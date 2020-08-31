@@ -21,6 +21,7 @@ class Load_custom_types_controller(QObject):
         self.main_view.load_file_button.clicked.connect(self.import_csv_types)
         self.main_view.add_button.clicked.connect(self.add_row)
         self.main_view.delete_button.clicked.connect(self.delete_selection)
+        self.main_view.save_button.clicked.connect(self.save_custom_types)
 
     @pyqtSlot(bool)
     def import_csv_types(self):
@@ -56,3 +57,13 @@ class Load_custom_types_controller(QObject):
             for row in reversed(range(self.model.rowCount())):
                 if selection.isRowSelected(row):
                     self.model.removeRows(row, 1)
+
+    def save_custom_types(self):
+        custom_loader.save_to_database(
+            self.model.csv_values, selected_names=self.model.header_model.values)
+        self.model.beginResetModel()
+        self.model.header_model.beginResetModel()
+        self.model.header_model.values = []
+        self.model.csv_values = [[]]
+        self.model.header_model.endResetModel()
+        self.model.endResetModel()
