@@ -48,11 +48,11 @@ class Load_custom_types_controller(QObject):
     def delete_selection(self):
         selection = self.main_view.table.selectionModel()
         if selection.hasSelection():
-            for column in range(self.model.columnCount()):
+            for column in reversed(range(self.model.columnCount())):
                 if selection.isColumnSelected(column):
                     self.model.removeColumns(column, 1)
                     self.model.header_model.removeColumn(column)
 
-            for row in range(self.model.rowCount()):
+            for row in reversed(range(self.model.rowCount())):
                 if selection.isRowSelected(row):
                     self.model.removeRows(row, 1)
