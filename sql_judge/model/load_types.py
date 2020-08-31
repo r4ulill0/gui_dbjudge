@@ -5,16 +5,13 @@ from PyQt5.QtCore import Qt, QModelIndex, pyqtSlot
 class LoadTypesProcess(QAbstractTableModel):
     def __init__(self):
         super().__init__()
-        self.csv_values = [['a', 'b'], ['c', 'd']]
+        self.csv_values = []
 
     def rowCount(self, parent=QModelIndex()):
         return len(self.csv_values)
 
     def columnCount(self, parent=QModelIndex()):
-        max_len = 0
-        for row in self.csv_values:
-            max_len = len(row) if len(row) > max_len else max_len
-        return max_len
+        return len(self.csv_values[0])
 
     def data(self, index, role=Qt.DisplayRole):
         if role == Qt.DisplayRole:
@@ -27,7 +24,6 @@ class LoadTypesProcess(QAbstractTableModel):
                 self.insertColumns(index.column(), 1)
             if index.row() >= self.rowCount():
                 self.insertRows(index.row(), 1)
-            print(" ".join((str(index.row()), str(index.column()))))
             self.csv_values[index.row()][index.column()] = value
             self.dataChanged.emit(index, index)
             return True

@@ -25,10 +25,16 @@ class Load_custom_types_controller(QObject):
         file_selector = self.main_view.get_import_file_selector()
 
         if file_selector.exec_():
+            self.model.beginResetModel()
+            self.model.csv_values.clear()
             for file_name in file_selector.selectedFiles():
                 with open(file_name) as csv_file:
                     values = csv.reader(csv_file)
-                    for row_id, row in enumerate(values):
-                        for col_id, value in enumerate(row):
-                            index = self.model.createIndex(row_id, col_id)
-                            self.model.setData(index, value)
+                    for row in values:
+                        self.model.csv_values.append(row)
+                    # for row_id, row in enumerate(values):
+                    #     for col_id, value in enumerate(row):
+                    #         self.model.
+                        # index = self.model.createIndex(row_id, col_id)
+                        # self.model.setData(index, value)
+            self.model.endResetModel()
