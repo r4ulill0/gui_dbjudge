@@ -17,7 +17,8 @@ class LoadTypesProcess(QAbstractTableModel):
         return max_len
 
     def data(self, index, role=Qt.DisplayRole):
-        return self.csv_values[index.row()][index.column()]
+        if role == Qt.DisplayRole:
+            return self.csv_values[index.row()][index.column()]
 
     def setData(self, index, value, role=Qt.EditRole):
 
@@ -34,8 +35,6 @@ class LoadTypesProcess(QAbstractTableModel):
         return False
 
     def flags(self, index):
-        if not index.isValid():
-            return Qt.ItemIsEnabled
 
         return QAbstractTableModel.flags(self, index) | Qt.ItemIsEditable
 
