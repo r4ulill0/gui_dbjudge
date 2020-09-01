@@ -142,6 +142,7 @@ class Ui_NewSceneMenuSchema(object):
         spacerItem5 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout_4.addItem(spacerItem5)
         self.navbar_questions = QtWidgets.QPushButton(self.gridLayoutWidget)
+        self.navbar_questions.setEnabled(False)
         self.navbar_questions.setObjectName("navbar_questions")
         self.horizontalLayout_4.addWidget(self.navbar_questions)
         self.gridLayout.addLayout(self.horizontalLayout_4, 0, 0, 1, 3)

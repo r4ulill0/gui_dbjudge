@@ -336,6 +336,9 @@
       </item>
       <item>
        <widget class="QPushButton" name="navbar_questions">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
         <property name="text">
          <string>Configurar preguntas</string>
         </property>
