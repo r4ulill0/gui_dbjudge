@@ -7,7 +7,7 @@ from PyQt5.QtCore import pyqtSlot, pyqtSignal
 
 
 class Table_data_generation_tab(Ui_TablesDataGenerationTab, QWidget):
-    table_data_modified = pyqtSignal(str, str, str, str)
+    table_data_modified = pyqtSignal(str, str, str, tuple)
 
     def __init__(self, table):
         super().__init__()
@@ -31,7 +31,7 @@ class Table_data_generation_tab(Ui_TablesDataGenerationTab, QWidget):
         intermediate_widget.setLayout(self.verticalLayout)
         self.scrollArea.setWidget(intermediate_widget)
 
-    @pyqtSlot(str, str, str)
+    @pyqtSlot(str, str, tuple)
     def update_table(self, column, ctype, extra_data):
         table = self.table.name
         self.table_data_modified.emit(table, column, ctype, extra_data)

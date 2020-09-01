@@ -10,7 +10,7 @@ from PyQt5.QtGui import QColor
 
 
 class Column_data_generation_row(Ui_ColumnDataGenerationRow, QWidget):
-    type_info_modified = pyqtSignal(str, str, str)
+    type_info_modified = pyqtSignal(str, str, tuple)
 
     def __init__(self, column, dark_background):
         super().__init__()
@@ -31,6 +31,12 @@ class Column_data_generation_row(Ui_ColumnDataGenerationRow, QWidget):
         self.regex_radio_button.toggled.connect(self.update_type)
         self.default_type_radio_button.toggled.connect(self.update_type)
         self.custom_type_radio_button.toggled.connect(self.update_type)
+        self.custom_type_input.currentIndexChanged.connect(
+            self.update_type_for_combo)
+        self.regex_input.editingFinished.connect(
+            self.update_type_for_input_line)
+        self.regex_max_len_input.editingFinished.connect(
+            self.update_type_for_input_line)
 
         self._current_input = 'default'
 
@@ -42,6 +48,14 @@ class Column_data_generation_row(Ui_ColumnDataGenerationRow, QWidget):
         types = Manager.singleton_instance.get_fake_types()
         for fake_type in types:
             self.custom_type_input.addItem(fake_type[0])
+
+    @pyqtSlot(int)
+    def update_type_for_combo(self):
+        self.update_type()
+
+    @pyqtSlot(str)
+    def update_type_for_input_line(self):
+        self.update_type()
 
     @pyqtSlot(bool)
     def update_type(self):
@@ -58,7 +72,7 @@ class Column_data_generation_row(Ui_ColumnDataGenerationRow, QWidget):
                 current_type = self._get_button_type(button)
                 self._current_input = current_type
                 self._enable_current_input()
-                extra_data = self._get_extra_data_from(input_element)
+                extra_data = self._get_extra_data_from(self._current_input)
                 self.type_info_modified.emit(column, current_type, extra_data)
                 break
 
@@ -86,12 +100,11 @@ class Column_data_generation_row(Ui_ColumnDataGenerationRow, QWidget):
         }
         return mapped_types[button]
 
-    def _get_extra_data_from(self, input_element):
-        input_type = type(input_element)
-        data = None
-        if input_type == QLineEdit:
-            data = input_element.text()
-        elif input_type == QComboBox:
-            data = input_element.currentText()
+    def _get_extra_data_from(self, current_input):
+        data = ('', 0)
+        if current_input == 'custom':
+            data = (self.custom_type_input.currentText(),)
+        elif current_input == 'regex':
+            data = (self.regex_input.text(), self.regex_max_len_input.text())
 
         return data

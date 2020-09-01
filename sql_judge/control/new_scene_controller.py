@@ -67,16 +67,18 @@ class New_scene_controller(QObject):
             self.view_schema.set_files_selected(label_text)
 
 # DATA GENERATION
-    @pyqtSlot(str, str, str, str)
+    @pyqtSlot(str, str, str, tuple)
     def update_type(self, table_name, column_name, fake_name, extra_data):
         table = self.model.context.get_table_by_name(table_name)
         column = table.columns[column_name]
         del column.fake_type
+        column.max_char_len = None
         fake_type = None
         if fake_name == 'regex':
-            fake_type = Regex(extra_data)
+            fake_type = Regex(extra_data[0])
+            column.max_char_len = int(extra_data[1]) if extra_data[1] else 0
         elif fake_name == 'custom':
-            fake_type = Custom(extra_data)
+            fake_type = Custom(extra_data[0])
         else:
             fake_type = Default()
         column.fake_type = fake_type
