@@ -5,7 +5,7 @@ from PyQt5.QtCore import Qt, QModelIndex, pyqtSlot
 class LoadTypesProcess(QAbstractTableModel):
     def __init__(self):
         super().__init__()
-        self.csv_values = [[]]
+        self.csv_values = []
         self.header_model = HeaderModel()
 
     def index(self, row, column, parent=QModelIndex()):
@@ -15,7 +15,11 @@ class LoadTypesProcess(QAbstractTableModel):
         return len(self.csv_values)
 
     def columnCount(self, parent=QModelIndex()):
-        return len(self.csv_values[0])
+        count = 0
+        if len(self.csv_values):
+            count = len(self.csv_values[0])
+
+        return count
 
     def data(self, index, role=Qt.DisplayRole):
         if role == Qt.DisplayRole:

@@ -63,7 +63,7 @@ class Load_custom_types_controller(QObject):
             self.model.csv_values, selected_names=self.model.header_model.values)
         self.model.beginResetModel()
         self.model.header_model.beginResetModel()
-        self.model.header_model.values = []
-        self.model.csv_values = [[]]
+        self.model.header_model.values.clear()
+        self.model.csv_values.clear()
         self.model.header_model.endResetModel()
         self.model.endResetModel()
