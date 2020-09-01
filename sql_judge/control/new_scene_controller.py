@@ -1,4 +1,7 @@
+import os
+
 from PyQt5.QtCore import QObject, pyqtSlot
+from PyQt5.QtWidgets import QFileDialog
 from dbjudge.connection_manager.manager import Manager
 from dbjudge import filler
 from dbjudge import squema_recollector
@@ -19,6 +22,7 @@ class New_scene_controller(QObject):
         self.manager = Manager.singleton_instance
         self.model = Scene()
 
+        self.view_schema.load_file_button.clicked.connect(self.file_load)
         self.view_schema.confirm_button.clicked.connect(self.create_new_scene)
         self.view_questions.add_question_button.clicked.connect(
             self.add_question)
@@ -40,6 +44,27 @@ class New_scene_controller(QObject):
         self.manager.execute_sql(scene_ddl)
         self.manager.selected_db_connection.commit()
         self.view_schema.navbar_gen_data.setEnabled(True)
+
+    @pyqtSlot(bool)
+    def file_load(self):
+        file_selector = QFileDialog(
+            self.view_schema, 'Open DDL file', "/", "Sql files (*.sql)")
+
+        if file_selector.exec_():
+            file_names = file_selector.selectedFiles()
+            base_names = []
+            for file_name in file_names:
+                base_names.append(os.path.basename(file_name))
+                with open(file_name) as sql:
+                    for line in sql.readlines():
+                        self.view_schema.text_editor.appendPlainText(line)
+
+            if base_names:
+                label_text = ', '.join(base_names)
+            else:
+                label_text = 'Ningún archivo seleccionado'
+
+            self.view_schema.set_files_selected(label_text)
 
 # DATA GENERATION
     @pyqtSlot(str, str, str, str)
