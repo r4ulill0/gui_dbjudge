@@ -13,7 +13,7 @@ class Load_custom_types_menu(QWidget, Ui_LoadCustomTypesView):
 
         self.setupUi(self)
         self.table = TypesTable()
-        self.type_column_container.addWidget(self.table)
+        self.table_container.addWidget(self.table)
 
     @pyqtSlot(bool)
     def file_load(self):

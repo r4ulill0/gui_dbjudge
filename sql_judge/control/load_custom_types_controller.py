@@ -19,7 +19,8 @@ class Load_custom_types_controller(QObject):
         self.main_view.table.horizontalHeader().setModel(self.model.header_model)
 
         self.main_view.load_file_button.clicked.connect(self.import_csv_types)
-        self.main_view.add_button.clicked.connect(self.add_row)
+        self.main_view.add_row_button.clicked.connect(self.add_row)
+        self.main_view.add_column_button.clicked.connect(self.add_column)
         self.main_view.delete_button.clicked.connect(self.delete_selection)
         self.main_view.save_button.clicked.connect(self.save_custom_types)
 
@@ -54,6 +55,20 @@ class Load_custom_types_controller(QObject):
     def add_row(self):
         last_row = self.model.rowCount()
         self.model.insertRows(last_row+1, 1)
+
+        if not (self.model.rowCount() and self.model.columnCount()):
+            last_column = self.model.columnCount()
+            self.model.insertColumns(last_column+1, 1)
+            self.model.header_model.insertColumns(last_column+1, 1)
+
+    def add_column(self):
+        if not (self.model.rowCount() and self.model.columnCount()):
+            last_row = self.model.rowCount()
+            self.model.insertRows(last_row+1, 1)
+
+        last_column = self.model.columnCount()
+        self.model.insertColumns(last_column+1, 1)
+        self.model.header_model.insertColumns(last_column+1, 1)
 
     def delete_selection(self):
         selection = self.main_view.table.selectionModel()

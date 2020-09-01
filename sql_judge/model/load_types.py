@@ -100,3 +100,9 @@ class HeaderModel(QAbstractItemModel):
         self.beginRemoveColumns(index, column, column)
         self.values.pop(column)
         self.endRemoveColumns()
+
+    def insertColumns(self, column, amount, index=QModelIndex()):
+        self.beginInsertColumns(index, column, column+amount-1)
+        for idx in range(amount):
+            self.values.append(str(self.columnCount()+idx))
+        self.endInsertColumns()
