@@ -7,7 +7,7 @@ from dbjudge.custom_fakes import custom_loader
 from model.load_types import LoadTypesProcess
 from view.load_sql_menu import Load_sql_menu
 
-from PyQt5.QtCore import QObject, pyqtSlot, QModelIndex
+from PyQt5.QtCore import QObject, pyqtSlot, QModelIndex, Qt
 
 
 class Load_custom_types_controller(QObject):
@@ -57,6 +57,9 @@ class Load_custom_types_controller(QObject):
             for row in reversed(range(self.model.rowCount())):
                 if selection.isRowSelected(row):
                     self.model.removeRows(row, 1)
+
+            for cell in selection.selectedIndexes():
+                self.model.setData(cell, '', Qt.EditRole)
 
     def save_custom_types(self):
         custom_loader.save_to_database(
