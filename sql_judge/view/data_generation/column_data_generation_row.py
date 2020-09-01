@@ -32,6 +32,8 @@ class Column_data_generation_row(Ui_ColumnDataGenerationRow, QWidget):
         self.default_type_radio_button.toggled.connect(self.update_type)
         self.custom_type_radio_button.toggled.connect(self.update_type)
 
+        self._current_input = 'default'
+
         self._load_custom_types()
         self.setLayout(self.gridLayout)
 
@@ -51,11 +53,30 @@ class Column_data_generation_row(Ui_ColumnDataGenerationRow, QWidget):
 
         for button, input_element in mapped_buttons_and_type_info.items():
             if button.isChecked():
+                self._disable_current_input()
                 column = self.column.name
                 current_type = self._get_button_type(button)
+                self._current_input = current_type
+                self._enable_current_input()
                 extra_data = self._get_extra_data_from(input_element)
                 self.type_info_modified.emit(column, current_type, extra_data)
                 break
+
+    def _disable_current_input(self):
+        if self._current_input == 'regex':
+            self.regex_input.setEnabled(False)
+            self.regex_max_len_input.setEnabled(False)
+            self.max_len_label.setEnabled(False)
+        elif self._current_input == 'custom':
+            self.custom_type_input.setEnabled(False)
+
+    def _enable_current_input(self):
+        if self._current_input == 'regex':
+            self.regex_input.setEnabled(True)
+            self.regex_max_len_input.setEnabled(True)
+            self.max_len_label.setEnabled(True)
+        elif self._current_input == 'custom':
+            self.custom_type_input.setEnabled(True)
 
     def _get_button_type(self, button):
         mapped_types = {
