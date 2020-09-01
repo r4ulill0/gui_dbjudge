@@ -1,4 +1,4 @@
-import sys
+import os
 import csv
 
 from dbjudge import squema_recollector
@@ -23,6 +23,13 @@ class Load_custom_types_controller(QObject):
         self.main_view.delete_button.clicked.connect(self.delete_selection)
         self.main_view.save_button.clicked.connect(self.save_custom_types)
 
+    def _manage_file_open(self, files):
+        if not files:
+            text = 'Ningún archivo seleccionado'
+        else:
+            text = os.path.basename(files[0])
+        self.main_view.label.setText(text)
+
     @pyqtSlot(bool)
     def import_csv_types(self):
         file_selector = self.main_view.get_import_file_selector()
@@ -30,7 +37,9 @@ class Load_custom_types_controller(QObject):
         if file_selector.exec_():
             self.model.beginResetModel()
             self.model.csv_values.clear()
-            for file_name in file_selector.selectedFiles():
+            files = file_selector.selectedFiles()
+            self._manage_file_open(files)
+            for file_name in files:
                 with open(file_name) as csv_file:
                     values = csv.reader(csv_file)
                     for idx, row in enumerate(values):
@@ -70,3 +79,4 @@ class Load_custom_types_controller(QObject):
         self.model.csv_values.clear()
         self.model.header_model.endResetModel()
         self.model.endResetModel()
+        self._manage_file_open(None)
