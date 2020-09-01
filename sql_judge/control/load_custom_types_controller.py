@@ -103,6 +103,9 @@ class Load_custom_types_controller(QObject):
                 self.model.setData(cell, '', Qt.EditRole)
 
     def save_custom_types(self):
+        if self._editionMode:
+            Manager.singleton_instance.reset_custom_fake_types()
+
         custom_loader.save_to_database(
             self.model.csv_values, selected_names=self.model.header_model.values)
         self.model.beginResetModel()
@@ -119,7 +122,7 @@ class Load_custom_types_controller(QObject):
         self._editionMode = enabled
         self.main_view.load_file_button.setHidden(self._editionMode)
         self.main_view.label.setHidden(self._editionMode)
-        self.add_row_button.setHidden(self._editionMode)
-        self.add_column_button.setHidden(self._editionMode)
+        self.main_view.add_row_button.setHidden(self._editionMode)
+        self.main_view.add_column_button.setHidden(self._editionMode)
         if self._editionMode:
             self._load_fake_types()

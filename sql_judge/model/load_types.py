@@ -68,9 +68,8 @@ class LoadTypesProcess(QAbstractTableModel):
 
     def removeColumns(self, position, columns, index=QModelIndex()):
         self.beginRemoveColumns(index, position, position+columns-1)
-        delete_list = reversed(range(position, position+columns))
         for row in self.csv_values:
-            for column in delete_list:
+            for column in reversed(range(position, position+columns)):
                 row.pop(column)
 
 
