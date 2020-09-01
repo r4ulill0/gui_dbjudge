@@ -1,7 +1,8 @@
 import os
 import csv
-
+import itertools
 from dbjudge import squema_recollector
+from dbjudge.connection_manager.manager import Manager
 from dbjudge.custom_fakes import custom_loader
 
 from model.load_types import LoadTypesProcess
@@ -15,6 +16,7 @@ class Load_custom_types_controller(QObject):
         super().__init__()
         self.main_view = view
         self.model = LoadTypesProcess()
+        self._editionMode = False
         self.main_view.table.setModel(self.model)
         self.main_view.table.horizontalHeader().setModel(self.model.header_model)
 
@@ -30,6 +32,21 @@ class Load_custom_types_controller(QObject):
         else:
             text = os.path.basename(files[0])
         self.main_view.label.setText(text)
+
+    def _load_fake_types(self):
+        manager = Manager.singleton_instance
+        header_names = manager.get_fake_types()
+        data = []
+        for name in header_names:
+            type_data = manager.get_custom_fakes(name)
+            data.append(type_data)
+        transposed_data = list(map(list, itertools.zip_longest(*data)))
+        self.model.beginResetModel()
+        self.model.header_model.beginResetModel()
+        self.model.header_model.values = header_names
+        self.model.csv_values = transposed_data
+        self.model.header_model.endResetModel()
+        self.model.endResetModel()
 
     @pyqtSlot(bool)
     def import_csv_types(self):
@@ -95,3 +112,14 @@ class Load_custom_types_controller(QObject):
         self.model.header_model.endResetModel()
         self.model.endResetModel()
         self._manage_file_open(None)
+        if self._editionMode:
+            self._load_fake_types()
+
+    def editMode(self, enabled=True):
+        self._editionMode = enabled
+        self.main_view.load_file_button.setHidden(self._editionMode)
+        self.main_view.label.setHidden(self._editionMode)
+        self.add_row_button.setHidden(self._editionMode)
+        self.add_column_button.setHidden(self._editionMode)
+        if self._editionMode:
+            self._load_fake_types()

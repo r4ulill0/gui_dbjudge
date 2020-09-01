@@ -50,7 +50,7 @@
      </spacer>
     </item>
     <item row="8" column="0">
-     <widget class="QPushButton" name="administrate_users_button">
+     <widget class="QPushButton" name="edit_custom_fakes_button">
       <property name="text">
        <string>Editar tipos de relleno</string>
       </property>
@@ -104,7 +104,7 @@
      </spacer>
     </item>
     <item row="3" column="0">
-     <widget class="QPushButton" name="add_questions_button">
+     <widget class="QPushButton" name="edit_scene_button">
       <property name="text">
        <string>Editar escenarios</string>
       </property>

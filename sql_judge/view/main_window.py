@@ -113,6 +113,8 @@ class Main_window(QMainWindow, Ui_MainWindow):
             self.admin_menu_to_new_scene)
         self.admin_menu.load_custom_fakes_button.clicked.connect(
             self.admin_menu_to_load_custom_types_menu)
+        self.admin_menu.edit_custom_fakes_button.clicked.connect(
+            self.admin_menu_to_edit_custom_types_menu)
         self.admin_menu.return_button.clicked.connect(
             self.admin_menu_to_main_menu)
         # self.admin_menu.new_scene_button.clicked.connect(
@@ -197,6 +199,12 @@ class Main_window(QMainWindow, Ui_MainWindow):
 
     @pyqtSlot(bool)
     def admin_menu_to_load_custom_types_menu(self):
+        self.load_custom_types_controller.editMode(False)
+        self.views_stack.setCurrentWidget(self.load_custom_types_menu)
+
+    @pyqtSlot(bool)
+    def admin_menu_to_edit_custom_types_menu(self):
+        self.load_custom_types_controller.editMode(True)
         self.views_stack.setCurrentWidget(self.load_custom_types_menu)
 
     @pyqtSlot(bool)
