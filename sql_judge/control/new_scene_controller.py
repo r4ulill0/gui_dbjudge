@@ -76,11 +76,18 @@ class New_scene_controller(QObject):
         fake_type = None
         if fake_name == 'regex':
             fake_type = Regex(extra_data[0])
-            column.max_char_len = int(extra_data[1]) if extra_data[1] else 0
+            column.max_char_len = int(extra_data[1]) if extra_data[1] else None
         elif fake_name == 'custom':
             fake_type = Custom(extra_data[0])
         else:
             fake_type = Default()
+            max_value = extra_data[0]
+            min_value = extra_data[1]
+            max_char_len = extra_data[2]
+            column.max_value = max_value if max_value else None
+            column.min_value = min_value if min_value else None
+            column.max_char_len = max_char_len if max_char_len else None
+
         column.fake_type = fake_type
 
     @pyqtSlot(bool)

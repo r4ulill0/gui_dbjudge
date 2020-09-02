@@ -187,6 +187,49 @@
        </property>
       </widget>
      </item>
+     <item row="1" column="5">
+      <widget class="QLineEdit" name="max_default_input">
+       <property name="placeholderText">
+        <string>Valor máximo</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="6">
+      <widget class="QLineEdit" name="min_default_input">
+       <property name="placeholderText">
+        <string>Valor minimo</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="7">
+      <widget class="QLabel" name="max_default_len_label">
+       <property name="text">
+        <string>Longitud máxima:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="8">
+      <widget class="QLineEdit" name="max_default_len_input">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>20</width>
+         <height>0</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>50</width>
+         <height>16777215</height>
+        </size>
+       </property>
+      </widget>
+     </item>
     </layout>
    </item>
   </layout>

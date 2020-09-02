@@ -37,6 +37,10 @@ class Column_data_generation_row(Ui_ColumnDataGenerationRow, QWidget):
             self.update_type_for_input_line)
         self.regex_max_len_input.editingFinished.connect(
             self.update_type_for_input_line)
+        self.max_default_input.editingFinished.connect(
+            self.update_type_for_input_line)
+        self.min_default_input.editingFinished.connect(
+            self.update_type_for_input_line)
 
         self._current_input = 'default'
 
@@ -74,6 +78,11 @@ class Column_data_generation_row(Ui_ColumnDataGenerationRow, QWidget):
             self.max_len_label.setEnabled(False)
         elif self._current_input == 'custom':
             self.custom_type_input.setEnabled(False)
+        elif self._current_input == 'default':
+            self.max_default_input.setEnabled(False)
+            self.min_default_input.setEnabled(False)
+            self.max_default_len_input.setEnabled(False)
+            self.max_default_len_label.setEnabled(False)
 
     def _enable_current_input(self):
         if self._current_input == 'regex':
@@ -82,6 +91,11 @@ class Column_data_generation_row(Ui_ColumnDataGenerationRow, QWidget):
             self.max_len_label.setEnabled(True)
         elif self._current_input == 'custom':
             self.custom_type_input.setEnabled(True)
+        elif self._current_input == 'default':
+            self.max_default_input.setEnabled(True)
+            self.min_default_input.setEnabled(True)
+            self.max_default_len_input.setEnabled(True)
+            self.max_default_len_label.setEnabled(True)
 
     def _get_button_type(self, button):
         mapped_types = {
@@ -97,5 +111,9 @@ class Column_data_generation_row(Ui_ColumnDataGenerationRow, QWidget):
             data = (self.custom_type_input.currentText(),)
         elif current_input == 'regex':
             data = (self.regex_input.text(), self.regex_max_len_input.text())
+        elif current_input == 'default':
+            data = (self.max_default_input.text(),
+                    self.min_default_input.text(),
+                    self.max_default_len_input.text())
 
         return data
