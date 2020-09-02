@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>796</width>
-    <height>112</height>
+    <height>115</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -103,6 +103,9 @@
       <widget class="QLineEdit" name="regex_input">
        <property name="enabled">
         <bool>false</bool>
+       </property>
+       <property name="placeholderText">
+        <string>Expresión regular</string>
        </property>
       </widget>
      </item>

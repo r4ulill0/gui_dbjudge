@@ -13,7 +13,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_ColumnDataGenerationRow(object):
     def setupUi(self, ColumnDataGenerationRow):
         ColumnDataGenerationRow.setObjectName("ColumnDataGenerationRow")
-        ColumnDataGenerationRow.resize(796, 112)
+        ColumnDataGenerationRow.resize(796, 115)
         self.gridLayout_2 = QtWidgets.QGridLayout(ColumnDataGenerationRow)
         self.gridLayout_2.setObjectName("gridLayout_2")
         self.gridLayout = QtWidgets.QGridLayout()
@@ -91,4 +91,5 @@ class Ui_ColumnDataGenerationRow(object):
         self.custom_type_radio_button.setText(_translate("ColumnDataGenerationRow", "Tipo personalizado"))
         self.default_type_radio_button.setText(_translate("ColumnDataGenerationRow", "Aleatorio"))
         self.max_len_label.setText(_translate("ColumnDataGenerationRow", "Longitud máxima:"))
+        self.regex_input.setPlaceholderText(_translate("ColumnDataGenerationRow", "Expresión regular"))
         self.regex_radio_button.setText(_translate("ColumnDataGenerationRow", "Regex"))
