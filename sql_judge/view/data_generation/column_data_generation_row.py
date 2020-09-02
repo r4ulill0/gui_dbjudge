@@ -1,7 +1,6 @@
 from view.qt_view.data_generation.column_data_generation_row_view import Ui_ColumnDataGenerationRow
 
 from dbjudge.connection_manager.manager import Manager
-from dbjudge.structures.column import Column
 
 from PyQt5.QtWidgets import QWidget
 from PyQt5.QtWidgets import QLineEdit, QComboBox
@@ -12,7 +11,7 @@ from PyQt5.QtGui import QColor
 class Column_data_generation_row(Ui_ColumnDataGenerationRow, QWidget):
     type_info_modified = pyqtSignal(str, str, tuple)
 
-    def __init__(self, column, dark_background):
+    def __init__(self, column, dark_background, custom_types):
         super().__init__()
 
         self.setupUi(self)
@@ -27,6 +26,7 @@ class Column_data_generation_row(Ui_ColumnDataGenerationRow, QWidget):
         self.column = column
         self.itemAt = self.gridLayout.itemAt
         self.sizeHint = self.gridLayout.sizeHint
+        self.custom_type_input.addItems(custom_types)
 
         self.regex_radio_button.toggled.connect(self.update_type)
         self.default_type_radio_button.toggled.connect(self.update_type)
@@ -39,19 +39,6 @@ class Column_data_generation_row(Ui_ColumnDataGenerationRow, QWidget):
             self.update_type_for_input_line)
 
         self._current_input = 'default'
-
-        self._load_custom_types()
-        self.setLayout(self.gridLayout)
-
-    def load_custom_combobox(self, custom_types):
-        self.custom_type_input.clear()
-        self.custom_type_input.insertItems(0, custom_types)
-
-    def _load_custom_types(self):
-        self.custom_type_input.clear()
-        types = Manager.singleton_instance.get_fake_types()
-        for fake_type in types:
-            self.custom_type_input.addItem(fake_type[0])
 
     @pyqtSlot(int)
     def update_type_for_combo(self):

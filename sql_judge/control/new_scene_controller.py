@@ -100,13 +100,12 @@ class New_scene_controller(QObject):
             self.model.context = squema_recollector.create_context(conn)
 
         self.view_data_gen.tabWidget.clear()
+        custom_types = self.manager.get_fake_types()
         for _, table in enumerate(self.model.context.tables):
             new_tab_page = Table_data_generation_tab(
-                table)
+                table, custom_types)
             new_tab_page.table_data_modified.connect(self.update_type)
             self.view_data_gen.tabWidget.addTab(new_tab_page, table.name)
-            for column in new_tab_page.rows:
-                column.load_custom_combobox(self.manager.get_fake_types())
 
 # QUESTIONS
 
