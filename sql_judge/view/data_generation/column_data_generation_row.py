@@ -43,6 +43,10 @@ class Column_data_generation_row(Ui_ColumnDataGenerationRow, QWidget):
         self._load_custom_types()
         self.setLayout(self.gridLayout)
 
+    def load_custom_combobox(self, custom_types):
+        self.custom_type_input.clear()
+        self.custom_type_input.insertItems(0, custom_types)
+
     def _load_custom_types(self):
         self.custom_type_input.clear()
         types = Manager.singleton_instance.get_fake_types()
@@ -53,7 +57,7 @@ class Column_data_generation_row(Ui_ColumnDataGenerationRow, QWidget):
     def update_type_for_combo(self):
         self.update_type()
 
-    @pyqtSlot(str)
+    @pyqtSlot()
     def update_type_for_input_line(self):
         self.update_type()
 

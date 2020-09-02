@@ -105,6 +105,8 @@ class New_scene_controller(QObject):
                 table)
             new_tab_page.table_data_modified.connect(self.update_type)
             self.view_data_gen.tabWidget.addTab(new_tab_page, table.name)
+            for column in new_tab_page.rows:
+                column.load_custom_combobox(self.manager.get_fake_types())
 
 # QUESTIONS
 
