@@ -9,7 +9,9 @@ from dbjudge.structures.fake_types import Regex, Custom, Default
 from dbjudge.questions.generation import generator
 from view.new_scene_menu_schema import New_scene_menu_schema
 from view.data_generation.table_data_generation_tab import Table_data_generation_tab
+from view.questions.keywords_popup import KeywordsPopup
 from model.scene import Scene
+from model.popup_keywords import KeyWordsPopupModel
 
 
 class New_scene_controller(QObject):
@@ -26,6 +28,8 @@ class New_scene_controller(QObject):
         self.view_schema.confirm_button.clicked.connect(self.create_new_scene)
         self.view_questions.add_question_button.clicked.connect(
             self.add_question)
+        self.view_questions.keywords_edition_popped_up.connect(
+            self.keywords_edition)
         self.new_scene_event()
 
     def new_scene_event(self):
@@ -119,14 +123,26 @@ class New_scene_controller(QObject):
     def add_question(self):
         question = self.view_questions.get_question_text()
         answer = self.view_questions.get_answer_text()
-        self.model.questions.append((question, answer))
+        self.model.add_question(question, answer)
         self.view_questions.add_question(question, answer)
 
     def finish_scene_creation(self):
         # TODO progress popup
         filler.generate_fake_data(
             self.model.context, self.manager.selected_db_connection)
-        for question, query in self.model.questions:
+        for index, (question, query) in enumerate(self.model.questions):
             generator.create_question(
-                self.model.name, query, question, self.model.context)
+                self.model.name,
+                query,
+                question,
+                self.model.context,
+                self.model.get_formatted_keywords(index))
         # TODO Show popup with "created message" after creation, then redirection to admin menu
+
+    @pyqtSlot(int)
+    def keywords_edition(self, index):
+        keyword_options = ['Obligatorio', 'Prohibido']
+        selectable_keywords = self.manager.get_all_keywords()
+        popup = KeywordsPopup(keyword_options, selectable_keywords)
+        if popup.exec():
+            self.model.update_keywords(index, popup.model.return_data())
