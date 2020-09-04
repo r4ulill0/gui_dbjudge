@@ -24,9 +24,12 @@
     <enum>QLayout::SetMinimumSize</enum>
    </property>
    <item row="0" column="0">
-    <layout class="QGridLayout" name="gridLayout">
+    <layout class="QGridLayout" name="gridLayout" columnstretch="1,1,2,0,1">
      <property name="sizeConstraint">
       <enum>QLayout::SetMaximumSize</enum>
+     </property>
+     <property name="horizontalSpacing">
+      <number>20</number>
      </property>
      <item row="0" column="3">
       <spacer name="horizontalSpacer">
@@ -40,19 +43,6 @@
         </size>
        </property>
       </spacer>
-     </item>
-     <item row="0" column="1" rowspan="2">
-      <widget class="QLabel" name="question_label">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="MinimumExpanding" vsizetype="Preferred">
-         <horstretch>1</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
      </item>
      <item row="0" column="2" rowspan="2">
       <widget class="QLabel" name="answer_label">
@@ -124,6 +114,25 @@
         </widget>
        </item>
       </layout>
+     </item>
+     <item row="0" column="0" rowspan="2" colspan="2">
+      <widget class="QLabel" name="question_label">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="MinimumExpanding" vsizetype="Preferred">
+         <horstretch>1</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>40</width>
+         <height>40</height>
+        </size>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
      </item>
     </layout>
    </item>
