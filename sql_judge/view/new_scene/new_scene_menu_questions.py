@@ -1,5 +1,5 @@
 from view.qt_view.new_scene.new_scene_menu_questions_view import Ui_NewSceneMenuQuestions
-from view.questions.question_row import QuestionRow
+from view.new_scene.questions.question_row import QuestionRow
 from PyQt5.QtWidgets import QWidget
 from PyQt5.QtCore import pyqtSlot, Qt, pyqtSignal
 from PyQt5.QtGui import QPalette

@@ -9,13 +9,13 @@ from view.user_menu import User_menu
 from view.exam import Exam
 from view.results import Results
 from view.admin_menu import Admin_menu
-from view.new_scene_menu_schema import New_scene_menu_schema
-from view.new_scene_menu_datagen import New_scene_menu_datagen
-from view.new_scene_menu_questions import New_scene_menu_questions
+from view.new_scene.new_scene_menu_schema import New_scene_menu_schema
+from view.new_scene.new_scene_menu_datagen import New_scene_menu_datagen
+from view.new_scene.new_scene_menu_questions import New_scene_menu_questions
 from view.load_sql_menu import Load_sql_menu
 from view.load_custom_types_menu import Load_custom_types_menu
 from view.modify_scene_menu import Modify_scene_menu
-from view.data_generation_menu import Data_generation_menu
+# from view.data_generation_menu import Data_generation_menu
 from control.main_controller import Main_controller
 from control.exam_controller import Exam_controller
 from control.load_custom_types_controller import Load_custom_types_controller
@@ -47,7 +47,7 @@ class Main_window(QMainWindow, Ui_MainWindow):
         self.new_scene_menu_schema = New_scene_menu_schema()
         self.new_scene_menu_datagen = New_scene_menu_datagen()
         self.new_scene_menu_questions = New_scene_menu_questions()
-        self.data_generation_menu = Data_generation_menu()
+        # self.data_generation_menu = Data_generation_menu()
 
         # load views in the QStackedWidget
         self.views_stack = QStackedWidget(self)
@@ -63,7 +63,7 @@ class Main_window(QMainWindow, Ui_MainWindow):
         self.views_stack.addWidget(self.new_scene_menu_datagen)
         self.views_stack.addWidget(self.new_scene_menu_questions)
         # self.views_stack.addWidget(self.load_sql_menu)
-        self.views_stack.addWidget(self.data_generation_menu)
+        # self.views_stack.addWidget(self.data_generation_menu)
 
         # load controllers
         self.main_controller = Main_controller(self)

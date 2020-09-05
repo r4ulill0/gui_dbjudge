@@ -1,4 +1,4 @@
-from view.data_generation.table_data_generation_tab import Table_data_generation_tab
+from view.new_scene.data_generation.table_data_generation_tab import Table_data_generation_tab
 
 from dbjudge import squema_recollector
 from dbjudge import filler

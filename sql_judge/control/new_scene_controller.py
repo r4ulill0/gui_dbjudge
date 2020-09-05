@@ -7,9 +7,9 @@ from dbjudge import filler
 from dbjudge import squema_recollector
 from dbjudge.structures.fake_types import Regex, Custom, Default
 from dbjudge.questions.generation import generator
-from view.new_scene_menu_schema import New_scene_menu_schema
-from view.data_generation.table_data_generation_tab import Table_data_generation_tab
-from view.questions.keywords_popup import KeywordsPopup
+from view.new_scene.new_scene_menu_schema import New_scene_menu_schema
+from view.new_scene.data_generation.table_data_generation_tab import Table_data_generation_tab
+from view.new_scene.questions.keywords_popup import KeywordsPopup
 from model.scene import Scene
 from model.popup_keywords import KeyWordsPopupModel
 
