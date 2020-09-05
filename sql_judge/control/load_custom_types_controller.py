@@ -6,7 +6,6 @@ from dbjudge.connection_manager.manager import Manager
 from dbjudge.custom_fakes import custom_loader
 
 from model.load_types import LoadTypesProcess
-from view.load_sql_menu import Load_sql_menu
 
 from PyQt5.QtCore import QObject, pyqtSlot, QModelIndex, Qt
 
