@@ -1,4 +1,4 @@
-from view.qt_view.new_scene_menu_schema_view import Ui_NewSceneMenuSchema
+from view.qt_view.new_scene.new_scene_menu_schema_view import Ui_NewSceneMenuSchema
 from PyQt5.QtWidgets import QWidget
 from PyQt5.QtCore import pyqtSlot
 

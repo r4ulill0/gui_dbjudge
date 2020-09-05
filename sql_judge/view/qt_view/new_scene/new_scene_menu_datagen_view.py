@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file '/media/raul/OS/Users/king_/Desktop/carrera/curso2018-2019/2oCuatri/TFG/gui_dbjudge/sql_judge/view/qt_view/new_scene_menu_datagen_view.ui'
+# Form implementation generated from reading ui file '/media/raul/OS/Users/king_/Desktop/carrera/curso2018-2019/2oCuatri/TFG/gui_dbjudge/sql_judge/view/qt_view/new_scene/new_scene_menu_datagen_view.ui'
 #
 # Created by: PyQt5 UI code generator 5.13.2
 #
@@ -134,4 +134,4 @@ class Ui_NewSceneMenuDatagen(object):
         self.navbar_questions.setText(_translate("NewSceneMenuDatagen", "Configurar preguntas"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab), _translate("NewSceneMenuDatagen", "Tab 1"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), _translate("NewSceneMenuDatagen", "Tab 2"))
-from . import resources
+from view.qt_view import resources

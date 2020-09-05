@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file '/media/raul/OS/Users/king_/Desktop/carrera/curso2018-2019/2oCuatri/TFG/gui_dbjudge/sql_judge/view/qt_view/new_scene_menu_questions_view.ui'
+# Form implementation generated from reading ui file '/media/raul/OS/Users/king_/Desktop/carrera/curso2018-2019/2oCuatri/TFG/gui_dbjudge/sql_judge/view/qt_view/new_scene/new_scene_menu_questions_view.ui'
 #
 # Created by: PyQt5 UI code generator 5.13.2
 #
@@ -224,4 +224,4 @@ class Ui_NewSceneMenuQuestions(object):
         self.navbar_questions.setText(_translate("NewSceneMenuQuestions", "Configurar preguntas"))
         self.finish_button.setText(_translate("NewSceneMenuQuestions", "Terminar"))
         self.label_2.setText(_translate("NewSceneMenuQuestions", "<html><head/><body><p><span style=\" font-size:18pt; font-weight:600;\">Paso 3 - Añade las preguntas</span></p></body></html>"))
-from . import resources
+from view.qt_view import resources
