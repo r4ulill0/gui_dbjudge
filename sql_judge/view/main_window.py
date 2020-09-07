@@ -20,6 +20,7 @@ from control.main_controller import Main_controller
 from control.exam_controller import Exam_controller
 from control.load_custom_types_controller import Load_custom_types_controller
 from control.new_scene_controller import New_scene_controller
+from control.edit_scene_controller import Edit_scene_controller
 
 
 class Main_window(QMainWindow, Ui_MainWindow):
@@ -68,7 +69,9 @@ class Main_window(QMainWindow, Ui_MainWindow):
         self.exam_controller = Exam_controller(
             self.user_menu, self.exam, self.results)
         self.new_scene_controller = New_scene_controller(
-            self.main_controller, self.new_scene_menu_schema, self.new_scene_menu_datagen, self.new_scene_menu_questions)
+            self.new_scene_menu_schema, self.new_scene_menu_datagen, self.new_scene_menu_questions)
+        self.edit_scene_controller = Edit_scene_controller(
+            self.modify_scene_menu_config, self.modify_scene_menu_datagen, self.modify_scene_menu_questions)
         self.load_custom_types_controller = Load_custom_types_controller(
             self.load_custom_types_menu)
 
@@ -203,6 +206,7 @@ class Main_window(QMainWindow, Ui_MainWindow):
 
     @pyqtSlot(bool)
     def admin_menu_to_edit_scene(self):
+        self.edit_scene_controller.load_scenarios()
         self.views_stack.setCurrentWidget(self.modify_scene_menu_config)
 
     @pyqtSlot(bool)

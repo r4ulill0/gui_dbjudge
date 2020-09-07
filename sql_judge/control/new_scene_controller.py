@@ -15,9 +15,8 @@ from model.popup_keywords import KeyWordsPopupModel
 
 
 class New_scene_controller(QObject):
-    def __init__(self, controller, view_schema, view_data_gen, view_questions):
+    def __init__(self, view_schema, view_data_gen, view_questions):
         super().__init__()
-        self.main_controller = controller
         self.view_schema = view_schema
         self.view_data_gen = view_data_gen
         self.view_questions = view_questions
