@@ -55,7 +55,10 @@ class Edit_scene_controller(New_scene_controller, QObject):
     # CONFIG
 
     def delete_scenario(self):
+        self.manager.selected_db_connection.close()
+        self.manager.selected_db_connection = None
         self.manager.delete_database(self.current_scenario)
+        self.load_scenarios()
 
     def delete_data(self):
         self.manager.delete_database_data()
@@ -65,20 +68,21 @@ class Edit_scene_controller(New_scene_controller, QObject):
         pass
 
     def load_datagen_data(self):
-        manager = Manager.singleton_instance
-        manager.select_database(self.model.name)
-        conn = manager.selected_db_connection
+        if self.model.name:
+            manager = Manager.singleton_instance
+            manager.select_database(self.model.name)
+            conn = manager.selected_db_connection
 
-        if not self.model.context:
-            self.model.context = squema_recollector.create_context(conn)
+            if not self.model.context:
+                self.model.context = squema_recollector.create_context(conn)
 
-        self.view_data_gen.tabWidget.clear()
-        custom_types = self.manager.get_fake_types()
-        for _, table in enumerate(self.model.context.tables):
-            new_tab_page = Table_data_generation_tab(
-                table, custom_types)
-            new_tab_page.table_data_modified.connect(self.update_type)
-            self.view_data_gen.tabWidget.addTab(new_tab_page, table.name)
+            self.view_data_gen.tabWidget.clear()
+            custom_types = self.manager.get_fake_types()
+            for _, table in enumerate(self.model.context.tables):
+                new_tab_page = Table_data_generation_tab(
+                    table, custom_types)
+                new_tab_page.table_data_modified.connect(self.update_type)
+                self.view_data_gen.tabWidget.addTab(new_tab_page, table.name)
 
     # QUESTIONS
     def add_question(self, question_input=None, answer_input=None):
@@ -88,10 +92,15 @@ class Edit_scene_controller(New_scene_controller, QObject):
         self.view_questions.add_question(question, answer)
 
     def load_questions_data(self):
-        questions = self.manager.get_questions()
-        for question in questions:
-            answer = self.manager.get_correct_answer(question)
-            self.add_question(question, answer)
+        if self.model.name:
+            self.model.questions = []
+            self.model.keywords = []
+            self.view_questions.reset_questions()
+            self.manager.select_database(self.model.name)
+            questions = self.manager.get_questions()
+            for question in questions:
+                answer = self.manager.get_correct_answer(question)
+                self.add_question(question, answer)
 
     def save_questions(self):
         pass

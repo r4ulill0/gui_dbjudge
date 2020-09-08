@@ -76,3 +76,12 @@ class Modify_scene_questions(QWidget, Ui_ModifySceneMenuQuestions):
     def setCurrentScenario(self, scenario):
         index = self.comboBox.findText(scenario)
         self.comboBox.setCurrentIndex(index)
+
+    def reset_questions(self):
+        self._rows = []
+        child = self.verticalLayout.takeAt(0)
+        while (child):
+            child.widget().hide()
+            del child
+            child = self.verticalLayout.takeAt(0)
+        self.scrollArea.update()
