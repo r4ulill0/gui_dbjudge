@@ -14,6 +14,9 @@ class Modify_scene_questions(QWidget, Ui_ModifySceneMenuQuestions):
         super().__init__()
         self.setupUi(self)
         self.comboBox.currentTextChanged.connect(self.handle_scenario_change)
+        self._rows = []
+        self._base_color = Qt.gray
+        self._dark_color = QPalette().window().color()
 
     def add_question(self, question, answer):
         new_row = QuestionRow(question, answer, len(self._rows))

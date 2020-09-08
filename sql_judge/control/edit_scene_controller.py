@@ -35,6 +35,8 @@ class Edit_scene_controller(New_scene_controller, QObject):
             self.keywords_edition)
         self.view_questions.scenario_changed.connect(
             self.update_current_scenario)
+        self.view_questions.comboBox.currentTextChanged.connect(
+            self.load_questions_data)
 
     def load_scenarios(self):
         combo_list = self.manager.get_databases()
@@ -79,8 +81,17 @@ class Edit_scene_controller(New_scene_controller, QObject):
             self.view_data_gen.tabWidget.addTab(new_tab_page, table.name)
 
     # QUESTIONS
+    def add_question(self, question_input=None, answer_input=None):
+        question = question_input if question_input else self.view_questions.get_question_text()
+        answer = answer_input if answer_input else self.view_questions.get_answer_text()
+        self.model.add_question(question, answer)
+        self.view_questions.add_question(question, answer)
+
     def load_questions_data(self):
-        pass
+        questions = self.manager.get_questions()
+        for question in questions:
+            answer = self.manager.get_correct_answer(question)
+            self.add_question(question, answer)
 
     def save_questions(self):
         pass
