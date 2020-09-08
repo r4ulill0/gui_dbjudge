@@ -2,6 +2,8 @@ from view.new_scene.data_generation.table_data_generation_tab import Table_data_
 from control.new_scene_controller import New_scene_controller
 from model.scene import Scene
 
+from dbjudge import filler
+from dbjudge.structures.fake_types import Regex, Custom, Default
 from dbjudge.connection_manager.manager import Manager
 from dbjudge import squema_recollector
 from PyQt5.QtCore import QObject, pyqtSlot
@@ -28,6 +30,8 @@ class Edit_scene_controller(New_scene_controller, QObject):
             self.update_current_scenario)
         self.view_data_gen.comboBox.currentTextChanged.connect(
             self.load_datagen_data)
+        self.view_data_gen.generate_data_button.clicked.connect(
+            self.generate_data)
 
         self.view_questions.add_question_button.clicked.connect(
             self.add_question)
@@ -64,8 +68,35 @@ class Edit_scene_controller(New_scene_controller, QObject):
         self.manager.delete_database_data()
 
     # DATAGEN
-    def generate_extra_data(self):
-        pass
+    @pyqtSlot(str, str, str, tuple)
+    def update_type(self, table_name, column_name, fake_name, extra_data):
+        table = self.model.context.get_table_by_name(table_name)
+        column = table.columns[column_name]
+        del column.fake_type
+        column.max_char_len = None
+        fake_type = None
+        if fake_name == 'regex':
+            fake_type = Regex(extra_data[0])
+            column.max_char_len = int(extra_data[1]) if extra_data[1] else None
+        elif fake_name == 'custom':
+            fake_type = Custom(extra_data[0])
+        else:
+            fake_type = Default()
+            max_value = extra_data[0]
+            min_value = extra_data[1]
+            max_char_len = extra_data[2]
+            column.max_value = max_value if max_value else None
+            column.min_value = min_value if min_value else None
+            column.max_char_len = max_char_len if max_char_len else None
+
+        column.fake_type = fake_type
+
+    @pyqtSlot(bool)
+    def generate_data(self):
+        manager = Manager.singleton_instance
+        manager.select_database(self.model.name)
+        filler.generate_fake_data(
+            self.model.context, manager.selected_db_connection)
 
     def load_datagen_data(self):
         if self.model.name:
@@ -73,8 +104,7 @@ class Edit_scene_controller(New_scene_controller, QObject):
             manager.select_database(self.model.name)
             conn = manager.selected_db_connection
 
-            if not self.model.context:
-                self.model.context = squema_recollector.create_context(conn)
+            self.model.context = squema_recollector.create_context(conn)
 
             self.view_data_gen.tabWidget.clear()
             custom_types = self.manager.get_fake_types()
