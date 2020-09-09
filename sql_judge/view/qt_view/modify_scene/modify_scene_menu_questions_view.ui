@@ -31,6 +31,9 @@
      <property name="bottomMargin">
       <number>5</number>
      </property>
+     <property name="verticalSpacing">
+      <number>20</number>
+     </property>
      <item row="4" column="0" colspan="4">
       <layout class="QGridLayout" name="gridLayout_2" rowstretch="2,6,2,1" columnstretch="2,2,2,1,1,2,2,3">
        <property name="sizeConstraint">
@@ -217,7 +220,7 @@
             <x>0</x>
             <y>0</y>
             <width>985</width>
-            <height>192</height>
+            <height>175</height>
            </rect>
           </property>
           <layout class="QGridLayout" name="gridLayout_4">
@@ -370,6 +373,29 @@
            <width>200</width>
            <height>0</height>
           </size>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer name="horizontalSpacer_2">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeType">
+          <enum>QSizePolicy::Fixed</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="QPushButton" name="save_questions_button">
+         <property name="text">
+          <string>Guardar preguntas</string>
          </property>
         </widget>
        </item>

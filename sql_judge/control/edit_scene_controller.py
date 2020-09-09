@@ -6,6 +6,7 @@ from dbjudge import filler
 from dbjudge.structures.fake_types import Regex, Custom, Default
 from dbjudge.connection_manager.manager import Manager
 from dbjudge import squema_recollector
+from dbjudge.questions.generation import generator
 from PyQt5.QtCore import QObject, pyqtSlot
 
 
@@ -41,6 +42,8 @@ class Edit_scene_controller(New_scene_controller, QObject):
             self.update_current_scenario)
         self.view_questions.comboBox.currentTextChanged.connect(
             self.load_questions_data)
+        self.view_questions.save_questions_button.clicked.connect(
+            self.save_questions)
 
     def load_scenarios(self):
         combo_list = self.manager.get_databases()
@@ -133,4 +136,10 @@ class Edit_scene_controller(New_scene_controller, QObject):
                 self.add_question(question, answer)
 
     def save_questions(self):
-        pass
+        for index, (question, query) in enumerate(self.model.questions):
+            generator.create_question(
+                self.model.name,
+                query,
+                question,
+                self.model.context,
+                self.model.get_formatted_keywords(index))
