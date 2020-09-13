@@ -21,6 +21,9 @@ class Main_controller(QObject):
             'config.ini'
         )
 
+        if not os.path.exists(dir_cfg):
+            self.create_config_file(dir_cfg)
+
         config.read(dir_cfg)
         self.connection_manager = Manager(
             user=config['DATABASE']['user'],
@@ -29,3 +32,14 @@ class Main_controller(QObject):
             database_name=config['DATABASE']['dbname'],
             port=config['DATABASE']['port']
         )
+
+    def create_config_file(self, path):
+        config_file = configparser.ConfigParser()
+        config_file['DATABASE'] = {
+            'user': '',
+            'pass': '',
+            'host': '',
+            'dbname': '',
+            'port': ''
+        }
+        config_file.write(open(path, 'w'))
