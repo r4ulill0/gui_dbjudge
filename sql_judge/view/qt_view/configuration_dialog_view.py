@@ -1,0 +1,95 @@
+# -*- coding: utf-8 -*-
+
+# Form implementation generated from reading ui file '/media/raul/OS/Users/king_/Desktop/carrera/curso2018-2019/2oCuatri/TFG/gui_dbjudge/sql_judge/view/qt_view/configuration_dialog_view.ui'
+#
+# Created by: PyQt5 UI code generator 5.13.2
+#
+# WARNING! All changes made in this file will be lost!
+
+
+from PyQt5 import QtCore, QtGui, QtWidgets
+
+
+class Ui_ConfigurationDialog(object):
+    def setupUi(self, ConfigurationDialog):
+        ConfigurationDialog.setObjectName("ConfigurationDialog")
+        ConfigurationDialog.resize(640, 480)
+        ConfigurationDialog.setModal(True)
+        self.gridLayout_2 = QtWidgets.QGridLayout(ConfigurationDialog)
+        self.gridLayout_2.setObjectName("gridLayout_2")
+        self.gridLayout = QtWidgets.QGridLayout()
+        self.gridLayout.setVerticalSpacing(10)
+        self.gridLayout.setObjectName("gridLayout")
+        self.user_input = QtWidgets.QLineEdit(ConfigurationDialog)
+        self.user_input.setObjectName("user_input")
+        self.gridLayout.addWidget(self.user_input, 1, 2, 1, 1)
+        self.host_input = QtWidgets.QLineEdit(ConfigurationDialog)
+        self.host_input.setObjectName("host_input")
+        self.gridLayout.addWidget(self.host_input, 3, 2, 1, 1)
+        spacerItem = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        self.gridLayout.addItem(spacerItem, 6, 1, 1, 1)
+        self.label_4 = QtWidgets.QLabel(ConfigurationDialog)
+        self.label_4.setObjectName("label_4")
+        self.gridLayout.addWidget(self.label_4, 2, 1, 1, 1)
+        self.label_2 = QtWidgets.QLabel(ConfigurationDialog)
+        self.label_2.setObjectName("label_2")
+        self.gridLayout.addWidget(self.label_2, 5, 1, 1, 1)
+        self.horizontalLayout = QtWidgets.QHBoxLayout()
+        self.horizontalLayout.setContentsMargins(-1, 0, -1, -1)
+        self.horizontalLayout.setSpacing(0)
+        self.horizontalLayout.setObjectName("horizontalLayout")
+        self.save_button = QtWidgets.QPushButton(ConfigurationDialog)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.save_button.sizePolicy().hasHeightForWidth())
+        self.save_button.setSizePolicy(sizePolicy)
+        self.save_button.setObjectName("save_button")
+        self.horizontalLayout.addWidget(self.save_button)
+        self.gridLayout.addLayout(self.horizontalLayout, 7, 0, 1, 4)
+        spacerItem1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.gridLayout.addItem(spacerItem1, 1, 3, 1, 1)
+        self.label_3 = QtWidgets.QLabel(ConfigurationDialog)
+        self.label_3.setObjectName("label_3")
+        self.gridLayout.addWidget(self.label_3, 3, 1, 1, 1)
+        self.label_5 = QtWidgets.QLabel(ConfigurationDialog)
+        self.label_5.setObjectName("label_5")
+        self.gridLayout.addWidget(self.label_5, 4, 1, 1, 1)
+        self.pass_input = QtWidgets.QLineEdit(ConfigurationDialog)
+        self.pass_input.setObjectName("pass_input")
+        self.gridLayout.addWidget(self.pass_input, 2, 2, 1, 1)
+        spacerItem2 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.gridLayout.addItem(spacerItem2, 1, 0, 1, 1)
+        self.label = QtWidgets.QLabel(ConfigurationDialog)
+        self.label.setObjectName("label")
+        self.gridLayout.addWidget(self.label, 1, 1, 1, 1)
+        self.dbname_input = QtWidgets.QLineEdit(ConfigurationDialog)
+        self.dbname_input.setObjectName("dbname_input")
+        self.gridLayout.addWidget(self.dbname_input, 4, 2, 1, 1)
+        self.port_input = QtWidgets.QLineEdit(ConfigurationDialog)
+        self.port_input.setObjectName("port_input")
+        self.gridLayout.addWidget(self.port_input, 5, 2, 1, 1)
+        spacerItem3 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        self.gridLayout.addItem(spacerItem3, 0, 2, 1, 1)
+        self.gridLayout.setRowStretch(0, 4)
+        self.gridLayout.setRowStretch(1, 1)
+        self.gridLayout.setRowStretch(2, 1)
+        self.gridLayout.setRowStretch(3, 1)
+        self.gridLayout.setRowStretch(4, 1)
+        self.gridLayout.setRowStretch(5, 1)
+        self.gridLayout.setRowStretch(6, 4)
+        self.gridLayout.setRowStretch(7, 1)
+        self.gridLayout_2.addLayout(self.gridLayout, 0, 0, 1, 1)
+
+        self.retranslateUi(ConfigurationDialog)
+        QtCore.QMetaObject.connectSlotsByName(ConfigurationDialog)
+
+    def retranslateUi(self, ConfigurationDialog):
+        _translate = QtCore.QCoreApplication.translate
+        ConfigurationDialog.setWindowTitle(_translate("ConfigurationDialog", "Dialog"))
+        self.label_4.setText(_translate("ConfigurationDialog", "Contraseña:"))
+        self.label_2.setText(_translate("ConfigurationDialog", "Puerto:"))
+        self.save_button.setText(_translate("ConfigurationDialog", "Guardar"))
+        self.label_3.setText(_translate("ConfigurationDialog", "Host:"))
+        self.label_5.setText(_translate("ConfigurationDialog", "Nombre de base de datos:"))
+        self.label.setText(_translate("ConfigurationDialog", "Usuario:"))
