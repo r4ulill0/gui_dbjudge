@@ -1,20 +1,22 @@
 import os
 
-from PyQt5.QtCore import QObject, pyqtSlot
+from PyQt5.QtCore import QObject, pyqtSlot, pyqtSignal
 from PyQt5.QtWidgets import QFileDialog
 from dbjudge.connection_manager.manager import Manager
-from dbjudge import filler
 from dbjudge import squema_recollector
 from dbjudge.structures.fake_types import Regex, Custom, Default
-from dbjudge.questions.generation import generator
 from view.new_scene.new_scene_menu_schema import New_scene_menu_schema
 from view.new_scene.data_generation.table_data_generation_tab import Table_data_generation_tab
 from view.new_scene.questions.keywords_popup import KeywordsPopup
+from view.progress_dialog import ProgressDialog
 from model.scene import Scene
 from model.popup_keywords import KeyWordsPopupModel
+from control.threading import FinishSceneThread
 
 
 class New_scene_controller(QObject):
+    finished_scene = pyqtSignal()
+
     def __init__(self, view_schema, view_data_gen, view_questions):
         super().__init__()
         self.view_schema = view_schema
@@ -22,6 +24,7 @@ class New_scene_controller(QObject):
         self.view_questions = view_questions
         self.manager = Manager.singleton_instance
         self.model = Scene()
+        self.working_thread = None
 
         self.view_schema.load_file_button.clicked.connect(self.file_load)
         self.view_schema.confirm_button.clicked.connect(self.create_new_scene)
@@ -93,13 +96,6 @@ class New_scene_controller(QObject):
 
         column.fake_type = fake_type
 
-    @pyqtSlot(bool)
-    def generate_data(self):
-        manager = Manager.singleton_instance
-        manager.select_database(self.model.name)
-        filler.generate_fake_data(
-            self.model.context, manager.selected_db_connection)
-
     def load_scene_data(self):
 
         manager = Manager.singleton_instance
@@ -126,17 +122,17 @@ class New_scene_controller(QObject):
         self.view_questions.add_question(question, answer)
 
     def finish_scene_creation(self):
-        # TODO progress popup
-        filler.generate_fake_data(
-            self.model.context, self.manager.selected_db_connection)
-        for index, (question, query) in enumerate(self.model.questions):
-            generator.create_question(
-                self.model.name,
-                query,
-                question,
-                self.model.context,
-                self.model.get_formatted_keywords(index))
-        # TODO Show popup with "created message" after creation, then redirection to admin menu
+        self.manager.select_database(self.model.name)
+        progress_popup = ProgressDialog()
+        self.working_thread = FinishSceneThread(
+            self.model, self.manager)
+        self.working_thread.progression_made.connect(progress_popup.setValue)
+        self.working_thread.category_update.connect(
+            progress_popup.setLabelText)
+        progress_popup.canceled.connect(self.working_thread.quit)
+        self.working_thread.start()
+        if progress_popup.exec():
+            self.finished_scene.emit()
 
     @pyqtSlot(int)
     def keywords_edition(self, index):

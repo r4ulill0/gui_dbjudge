@@ -121,6 +121,8 @@ class Main_window(QMainWindow, Ui_MainWindow):
         self.new_scene_menu_questions.return_button.clicked.connect(
             self.new_scene_to_admin_menu)
         self.new_scene_menu_questions.finish_button.clicked.connect(
+            self.new_scene_controller.finish_scene_creation)
+        self.new_scene_controller.finished_scene.connect(
             self.finish_scene_transition)
         self.modify_scene_menu_config.navbar_gen_data.clicked.connect(
             self.modify_scene_config_to_modify_scene_datagen)
@@ -258,9 +260,7 @@ class Main_window(QMainWindow, Ui_MainWindow):
     def new_scene_menu_questions_to_datagen(self):
         self.views_stack.setCurrentWidget(self.new_scene_menu_datagen)
 
-    @pyqtSlot(bool)
     def finish_scene_transition(self):
-        self.new_scene_controller.finish_scene_creation()
         self.views_stack.setCurrentWidget(self.admin_menu)
 
     def load_custom_types_menu_to_admin_menu(self):
