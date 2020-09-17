@@ -185,6 +185,7 @@ class Main_window(QMainWindow, Ui_MainWindow):
 
     @pyqtSlot(bool)
     def admin_menu_to_new_scene(self):
+        self.new_scene_controller.new_scene_event()
         self.views_stack.setCurrentWidget(self.new_scene_menu_schema)
 
     @pyqtSlot(bool)

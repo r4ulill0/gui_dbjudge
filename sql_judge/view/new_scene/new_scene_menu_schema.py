@@ -9,6 +9,12 @@ class New_scene_menu_schema(Ui_NewSceneMenuSchema, QWidget):
 
         self.setupUi(self)
 
+    def clear(self):
+        self.scene_name_input.clear()
+        self.text_editor.clear()
+        self.navbar_gen_data.setEnabled(False)
+        self.files_selected_label.setText("Ningún archivo seleccionado")
+
     def set_files_selected(self, text):
         self.files_selected_label.setText(text)
 

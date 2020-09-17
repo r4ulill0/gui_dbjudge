@@ -35,7 +35,9 @@ class New_scene_controller(QObject):
         self.new_scene_event()
 
     def new_scene_event(self):
+        self.view_schema.clear()
         self.view_schema.navbar_gen_data.setEnabled(False)
+        self.model = Scene()
 
 # SCHEMA
     @pyqtSlot(bool)
