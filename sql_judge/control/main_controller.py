@@ -47,6 +47,7 @@ class Main_controller(QObject):
 
             first_loop = False
             try:
+                _check_for_empty_fields(config)
                 self.connection_manager = Manager(
                     user=config['DATABASE']['user'],
                     password=config['DATABASE']['pass'],
@@ -68,3 +69,15 @@ class Main_controller(QObject):
             'port': ''
         }
         config_file.write(open(path, 'w'))
+
+
+def _check_for_empty_fields(config):
+    user_check = bool(config['DATABASE']['user'])
+    password_check = bool(config['DATABASE']['pass'])
+    host_check = bool(config['DATABASE']['host'])
+    dbname_check = bool(config['DATABASE']['dbname'])
+    port_check = bool(config['DATABASE']['port'])
+
+    correct = user_check and password_check and host_check and dbname_check and port_check
+    if not correct:
+        raise Error()
