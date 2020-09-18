@@ -32,7 +32,7 @@
       <number>5</number>
      </property>
      <item row="4" column="0" colspan="4">
-      <layout class="QGridLayout" name="gridLayout_2" rowstretch="2,6,2,1" columnstretch="2,2,2,1,1,2,2,3">
+      <layout class="QGridLayout" name="gridLayout_2" rowstretch="2,6,2,1" columnstretch="2,2,2,1,2,2,2,2">
        <property name="sizeConstraint">
         <enum>QLayout::SetMinimumSize</enum>
        </property>
@@ -230,6 +230,39 @@
        </item>
       </layout>
      </item>
+     <item row="1" column="0" rowspan="2" colspan="4">
+      <layout class="QHBoxLayout" name="horizontalLayout">
+       <item>
+        <widget class="QLabel" name="label_3">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="pixmap">
+          <pixmap resource="../resources.qrc">:/icons/inscription-50.png</pixmap>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_2">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="text">
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:18pt; font-weight:600;&quot;&gt;Paso 3 - Añade las preguntas&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
      <item row="0" column="0" colspan="4">
       <layout class="QHBoxLayout" name="horizontalLayout_9">
        <property name="spacing">
@@ -422,73 +455,40 @@
            </property>
           </widget>
          </item>
-         <item>
-          <layout class="QHBoxLayout" name="horizontalLayout_8">
-           <item>
-            <spacer name="horizontalSpacer_12">
-             <property name="orientation">
-              <enum>Qt::Horizontal</enum>
-             </property>
-             <property name="sizeType">
-              <enum>QSizePolicy::Fixed</enum>
-             </property>
-             <property name="sizeHint" stdset="0">
-              <size>
-               <width>160</width>
-               <height>20</height>
-              </size>
-             </property>
-            </spacer>
-           </item>
-           <item>
-            <widget class="QPushButton" name="finish_button">
-             <property name="maximumSize">
-              <size>
-               <width>120</width>
-               <height>30</height>
-              </size>
-             </property>
-             <property name="text">
-              <string>Terminar</string>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </item>
         </layout>
        </item>
-      </layout>
-     </item>
-     <item row="1" column="0" rowspan="2" colspan="4">
-      <layout class="QHBoxLayout" name="horizontalLayout">
        <item>
-        <widget class="QLabel" name="label_3">
-         <property name="enabled">
-          <bool>true</bool>
+        <spacer name="horizontalSpacer_12">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
          </property>
-         <property name="text">
-          <string/>
+         <property name="sizeType">
+          <enum>QSizePolicy::MinimumExpanding</enum>
          </property>
-         <property name="pixmap">
-          <pixmap resource="../resources.qrc">:/icons/inscription-50.png</pixmap>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>160</width>
+           <height>20</height>
+          </size>
          </property>
-         <property name="alignment">
-          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-         </property>
-        </widget>
+        </spacer>
        </item>
        <item>
-        <widget class="QLabel" name="label_2">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="text">
-          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:18pt; font-weight:600;&quot;&gt;Paso 3 - Añade las preguntas&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-         </property>
-        </widget>
+        <layout class="QHBoxLayout" name="horizontalLayout_8">
+         <item>
+          <widget class="QPushButton" name="finish_button">
+           <property name="maximumSize">
+            <size>
+             <width>120</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>Terminar</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
        </item>
       </layout>
      </item>
